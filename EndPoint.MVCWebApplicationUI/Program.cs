@@ -1,7 +1,13 @@
-var builder = WebApplication.CreateBuilder(args);
+﻿var builder = WebApplication.CreateBuilder(args); // به کمک این متد ، می تونیم هم از کانفیگور و هم از کافیگور سرویس استفاده کنیم
 
+#region Configure Service
 // Add services to the container.
+
 builder.Services.AddControllersWithViews();
+
+#endregion
+
+#region Configure
 
 var app = builder.Build();
 
@@ -25,3 +31,5 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+#endregion
