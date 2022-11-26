@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EStor.Domain.Entities.Users;
+using Microsoft.EntityFrameworkCore;
 
 namespace EStor.Application.Interfaces.Contexts
 {
