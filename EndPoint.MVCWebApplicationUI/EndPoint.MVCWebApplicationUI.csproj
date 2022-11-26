@@ -12,9 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\AdminPanel\Controllers\" />
     <Folder Include="Areas\AdminPanel\Data\" />
     <Folder Include="Areas\AdminPanel\Models\" />
+    <Folder Include="wwwroot\WebApplicationTemplate\assets\images\menu-main\card\" />
   </ItemGroup>
 
 </Project>
