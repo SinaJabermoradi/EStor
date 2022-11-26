@@ -20,4 +20,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EStor.Domain\EStor.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
