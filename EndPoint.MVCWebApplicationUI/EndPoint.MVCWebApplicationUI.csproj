@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.11" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.11" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.11">
 	    <PrivateAssets>all</PrivateAssets>
@@ -19,12 +18,17 @@
 	    <PrivateAssets>all</PrivateAssets>
 	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Core" Version="6.0.10" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Areas\AdminPanel\Data\" />
     <Folder Include="Areas\AdminPanel\Models\" />
     <Folder Include="wwwroot\WebApplicationTemplate\assets\images\menu-main\card\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EStor.Persistence\EStor.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,25 @@
-﻿var builder = WebApplication.CreateBuilder(args); // به کمک این متد ، می تونیم هم از کانفیگور و هم از کافیگور سرویس استفاده کنیم
+﻿using System.Configuration;
+using EStor.Application.Interfaces.Contexts;
+using EStor.Persistence.Context;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+
+var builder = WebApplication.CreateBuilder(args); // به کمک این متد ، می تونیم هم از کانفیگور و هم از کافیگور سرویس استفاده کنیم
 
 #region Configure Service
 // Add services to the container.
+
+builder.Services.AddScoped<IDataBaseContext, DataBaseContext>();
+
+string connectionString = new SqlConnectionStringBuilder()
+{
+    DataSource = @"DESKTOP-RIGJNO6\DEVELOP",
+    InitialCatalog = "EStor_DB",
+    IntegratedSecurity = true
+}.ConnectionString;
+
+builder.Services.AddEntityFrameworkSqlServer()
+    .AddDbContext<DataBaseContext>(options => options.UseSqlServer(connectionString));
 
 builder.Services.AddControllersWithViews();
 
