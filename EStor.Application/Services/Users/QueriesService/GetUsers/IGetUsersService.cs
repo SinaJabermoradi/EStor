@@ -8,6 +8,6 @@ namespace EStor.Application.Services.Users.QueriesService.GetUsers
 {
     public interface IGetUsersService
     {
-        public List<UsersDto> Execute(GetUserRequestDto requestDto);
+        public ResultGetUserDto Execute(GetUserRequestDto requestDto);
     }
 }

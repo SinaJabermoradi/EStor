@@ -12,9 +12,9 @@ public class GetUsersService : IGetUsersService
         _context = context;
     }
 
-    public List<UsersDto> Execute(GetUserRequestDto requestDto)
+    public ResultGetUserDto Execute(GetUserRequestDto requestDto)
     {
-        int rowsCount = 0;
+        int rowsCount = 0; // This Local Variable Is (( Out )) 
         var users = _context.Users.AsQueryable();
 
         if (!string.IsNullOrWhiteSpace(requestDto.SearchKey))
@@ -24,12 +24,18 @@ public class GetUsersService : IGetUsersService
                 user.Email.Contains(requestDto.SearchKey));
         }
 
-        return users.ToPaged(requestDto.Page, 20, out rowsCount)
+        var userList =  users.ToPaged(requestDto.Page, 20, out rowsCount)
             .Select(user => new UsersDto
             {
                 FullName = user.FullName,
                 Email =  user.Email,
                 Id = user.Id
             }).ToList();
+
+        return new ResultGetUserDto
+        {
+            Rows = rowsCount,
+            Users = userList
+        };
     }
 }
