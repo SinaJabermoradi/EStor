@@ -1,8 +1,71 @@
-﻿
+﻿@using EStor.Application.Services.Users.QueriesService.GetUsers
+@model ResultGetUserDto
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/AdminPanel/Views/Shared/_AdminTemplateLayout.cshtml";
+
+    string value = "odd";
+    long counter = 1;
 }
 
-<h1>صفحه  ادمین</h1>
+
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <section id="configuration">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title-wrap bar-success">
+                                <h4 class="card-title">لیست کاربران سایت</h4>
+                            </div>
+                        </div>
+                        <div class="card-body collapse show">
+                            <div class="card-block card-dashboard">
+                                <p class="card-text">داده های جداول اغلب ویژگی های پیش فرض را فعال می کنند، بنابراین همه چیزهایی که باید برای استفاده از آن با استفاده از ables خود انجام دهید، تماس با تابع ساخت است: $ (). DataTable ()؛</p>
+                                <table class="table table-striped table-bordered zero-configuration">
+                                    <thead>
+                                        <tr role="row" class="even">
+                                            <th class="sorting_asc" tabindex="0" style="width: 222px;" rowspan="1" colspan="1" aria-label="نام">نام</th>
+                                            <th class="sorting_asc" tabindex="1" style="width: 738px;" rowspan="1" colspan="2" aria-label="ایمیل">ایمیل</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach (var user in Model.Users)
+                                    {
+                                      if (counter % 2 == 0)
+                                            value = "even";
+                                        else
+                                            value = "odd";
+                                        <tr role="row" class="@value">
+                                            <td class="sorting_1">@user.FullName</td>
+                                            <td>@user.Email</td>
+                                            <td>
+                                                <button class="btn btn-info">ویرایش</button>
+                                                <button class="btn btn-danger">حذف کردن</button>
+                                                <button class="btn btn-warning">غیر فعال</button>
+                                            </td>
+                                        </tr>
+                                    }    
+                                    </tbody>
+                                 @*   <tfoot>
+                                        <tr>
+                                            <th>نام</th>
+                                            <th>موقعیت</th>
+                                            <th>اداره</th>
+                                            <th>سن</th>
+                                            <th>تاریخ شروع</th>
+                                            <th>حقوق</th>
+                                        </tr>
+                                    </tfoot>*@
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
 

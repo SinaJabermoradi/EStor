@@ -1,13 +1,19 @@
-﻿using System.Configuration;
-using EStor.Application.Interfaces.Contexts;
+﻿using EStor.Application.Interfaces.Contexts;
 using EStor.Application.Services.Users.QueriesService.GetUsers;
 using EStor.Persistence.Context;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
+
+#region Main()
+
+#region Main() کد های مربوط به خود ِمتد 
+
 var builder = WebApplication.CreateBuilder(args); // به کمک این متد ، می تونیم هم از کانفیگور و هم از کافیگور سرویس استفاده کنیم
 
-#region Configure Service
+#endregion
+
+#region Configure Service()
 // Add services to the container.
 
 #region Service Dependency Injection تزریق وابستگی سرویس ها یا 
@@ -31,7 +37,7 @@ builder.Services.AddControllersWithViews();
 
 #endregion
 
-#region Configure
+#region Configure()
 
 var app = builder.Build();
 
@@ -65,5 +71,7 @@ app.UseEndpoints(endpoints =>
 
 
 app.Run();
+
+#endregion
 
 #endregion
