@@ -1,5 +1,6 @@
 ﻿using System.Configuration;
 using EStor.Application.Interfaces.Contexts;
+using EStor.Application.Services.Users.QueriesService.GetUsers;
 using EStor.Persistence.Context;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +10,12 @@ var builder = WebApplication.CreateBuilder(args); // به کمک این متد �
 #region Configure Service
 // Add services to the container.
 
+#region Service Dependency Injection تزریق وابستگی سرویس ها یا 
+
 builder.Services.AddScoped<IDataBaseContext, DataBaseContext>();
+builder.Services.AddScoped<IGetUsersService, GetUsersService>();
+
+#endregion
 
 string connectionString = new SqlConnectionStringBuilder()
 {
