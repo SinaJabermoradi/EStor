@@ -3,7 +3,7 @@ using EStor.CommonUtility;
 
 namespace EStor.Application.Services.Users.QueriesService.GetUsers;
 
-class GetUsersService : IGetUsersService
+public class GetUsersService : IGetUsersService
 {
     private  readonly  IDataBaseContext _context;
 
