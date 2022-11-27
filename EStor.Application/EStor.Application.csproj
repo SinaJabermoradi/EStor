@@ -21,6 +21,7 @@
 	</ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EStor.CommonUtility\EStor.CommonUtility.csproj" />
     <ProjectReference Include="..\EStor.Domain\EStor.Domain.csproj" />
   </ItemGroup>
 
