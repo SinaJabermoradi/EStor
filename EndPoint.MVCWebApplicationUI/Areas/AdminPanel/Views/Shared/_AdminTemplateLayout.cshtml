@@ -47,7 +47,11 @@ bootstrap-admin-dashboard-template/demo-2/grids.html by HTTrack Website Copier/3
                 <div class="nav-container">
                     <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
                         <li class="has-sub nav-item">
-                            <a href="#"><i class="icon-home"></i><span data-i18n="" class="menu-title">داشبورد</span><span class="tag badge badge-pill badge-danger mt-1">2</span></a>
+                            <a href="#">
+                                <i class="icon-home"></i>
+                                <span data-i18n="" class="menu-title">داشبورد</span>
+                                <span class="tag badge badge-pill badge-danger mt-1">2</span>
+                            </a>
                             <ul class="menu-content">
                                 <li>
                                     <a href="dashboard-ecommerce.html" class="menu-item">تجارت الکترونیک</a>
@@ -58,20 +62,27 @@ bootstrap-admin-dashboard-template/demo-2/grids.html by HTTrack Website Copier/3
                             </ul>
                         </li>
                         <li class="has-sub nav-item">
-                            <a href="#"><i class="icon-users"></i><span data-i18n="" class="menu-title">مدیریت کاربران سایت</span><span class="tag badge badge-pill badge-danger mt-1">2</span></a>
+                            <a href="#">
+                                <i class="icon-users"></i>
+                                <span data-i18n="" class="menu-title">مدیریت کاربران سایت</span>
+                                <span class="tag badge badge-pill badge-danger mt-1">2</span>
+                            </a>
                             <ul class="menu-content">
                                 <li class="active">
-                                    <a href="chat.html" class="menu-item">لیست کاربران</a>
+                                    @*<a href="" class="menu-item">لیست کاربران</a>*@
+                                    <a asp-action="Index" asp-controller="User" class="menu-item">لیست کاربران</a>
                                 </li>
                                 <li>
-                                    <a href="taskboard.html" class="menu-item">ثبت نام کاربر جدید * </a>
+                                    <a asp-action="CreateUser" asp-controller="User" class="menu-item">ثبت نام کاربر جدید * </a>
                                 </li>
                             </ul>
                         </li>
                     </ul>
                 </div>
             </div>
-            <div class="sidebar-background"></div>
+            <!-- لیست منو های ما در ساید بار سمت راست در اینجا نوشته میشود-->
+            <div class="sidebar-background">
+            </div>
         </div>
 
 
