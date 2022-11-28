@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewData["Title"] = "ثبت نام کاربر";
+    Layout = "~/Areas/AdminPanel/Views/Shared/_AdminTemplateLayout.cshtml";
+}
+
+
+<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header">
+					<div class="card-title-wrap bar-success">
+						<h4 class="card-title mb-0">فرم ثبت نام کاربر جدید</h4>
+					</div>
+				</div>
+				<div class="card-body">
+					<div class="px-3">
+						<form class="form">
+							<div class="form-body">
+								<div class="row">
+									<div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+										<fieldset class="form-group">
+											<label for="basicInput">ورودی پایه</label>
+											<input type="text" class="form-control" id="basicInput">
+										</fieldset>
+									</div>
+									<div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+										<fieldset class="form-group">
+											<label for="helpInputTop">متن ورودی با کمک</label>
+											<small class="text-muted"><i>fkazemi5236@gmail.com</i></small>
+											<input type="text" class="form-control" id="helpInputTop">
+										</fieldset>
+									</div>
+									<div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+										<fieldset class="form-group">
+											<label for="disabledInput">ورودی غیر فعال</label>
+											<input type="text" class="form-control" id="disabledInput" disabled="">
+										</fieldset>
+									</div>
+									<div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+										<fieldset class="form-group">
+											<label for="disabledInput">ورودی فقط خواندنی</label>
+											<input type="text" class="form-control" id="readonlyInput" readonly="readonly" value="شما نمی توانید من را به روز کنید:">
+
+										</fieldset>
+									</div>
+									<div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+										<fieldset class="form-group">
+											<label for="disabledInput">ورودی با حفره یا سوراخ</label>
+											<input type="email" class="form-control" id="placeholderInput" placeholder="آدرس ایمیل را وارد کنید">
+										</fieldset>
+									</div>
+									<div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+										<fieldset class="form-group">
+											<label for="disabledInput">متن ثابت</label>
+											<p class="form-control-static" id="staticInput">fkazemi5236@gmail.com</p>
+										</fieldset>
+									</div>
+									<div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+										<fieldset class="form-group">
+											<label for="roundText">ورودی گرد</label>
+											<input type="text" id="roundText" class="form-control round" placeholder="ورودی گرد">
+										</fieldset>
+									</div>
+									<div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+										<fieldset class="form-group">
+											<label for="squareText">ورودی میدان</label>
+											<input type="text" id="squareText" class="form-control square" placeholder="ورودی میدان">
+										</fieldset>
+									</div>
+									<div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+										<fieldset class="form-group">
+											<label for="helperText">با متن راهنما</label>
+											<input type="text" id="helperText" class="form-control" placeholder="نام">
+											<p><small class="text-muted">متن مورد نظر را برای جعبه داده شده اینجا پیدا کنید.</small></p>
+										</fieldset>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
