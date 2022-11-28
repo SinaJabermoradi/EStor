@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace EndPoint.MVCWebApplicationUI.Areas.AdminPanel.Controllers
 {
     [Controller]
+    [Area("AdminPanel")]
     public class UserController : Controller
     {
         #region Filds
@@ -26,7 +27,7 @@ namespace EndPoint.MVCWebApplicationUI.Areas.AdminPanel.Controllers
 
         #region ActionMethod
 
-        [Area("AdminPanel")]
+        [HttpGet]
         public IActionResult Index(string searchKey, int page = 1)
         {
             return View(_usersService.Execute(new GetUserRequestDto
@@ -36,6 +37,11 @@ namespace EndPoint.MVCWebApplicationUI.Areas.AdminPanel.Controllers
             }));
         }
 
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
         #endregion
 
         #endregion
