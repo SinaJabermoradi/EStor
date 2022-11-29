@@ -77,12 +77,30 @@ namespace EStor.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
-                    b.Property<int>("Role")
-                        .HasColumnType("int");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            Name = "Admin"
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            Name = "Operator"
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            Name = "Customer"
+                        });
                 });
 
             modelBuilder.Entity("EStor.Domain.Entities.Users.UserInRole", b =>
