@@ -30,6 +30,7 @@ bootstrap-admin-dashboard-template/demo-2/grids.html by HTTrack Website Copier/3
     <link rel="stylesheet" type="text/css" href="~/AdminPanelTemplate/app-assets/vendors/css/perfect-scrollbar.min.css">
     <link rel="stylesheet" type="text/css" href="~/AdminPanelTemplate/app-assets/vendors/css/prism.min.css">
     <link rel="stylesheet" type="text/css" href="~/AdminPanelTemplate/app-assets/css/app.css">
+    @RenderSectionAsync("Css",false)
 </head>
 <body data-col="2-columns" class=" 2-columns ">
     <!-- ////////////////////////////////////////////////////////////////////////////-->
@@ -421,7 +422,9 @@ bootstrap-admin-dashboard-template/demo-2/grids.html by HTTrack Website Copier/3
     <script src="~/AdminPanelTemplate/app-assets/js/customizer.js"></script>
     <!-- END CONVEX JS-->
     <!-- BEGIN PAGE LEVEL JS-->
-    <!-- END PAGE LEVEL JS-->
+<!-- END PAGE LEVEL JS-->
+
+@RenderSectionAsync("script" , false)
 </body>
 
 </html>

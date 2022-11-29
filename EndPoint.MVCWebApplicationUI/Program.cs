@@ -1,4 +1,5 @@
 ﻿using EStor.Application.Interfaces.Contexts;
+using EStor.Application.Services.Users.QueriesService.GetRoles;
 using EStor.Application.Services.Users.QueriesService.GetUsers;
 using EStor.Persistence.Context;
 using Microsoft.Data.SqlClient;
@@ -20,6 +21,7 @@ var builder = WebApplication.CreateBuilder(args); // به کمک این متد �
 
 builder.Services.AddScoped<IDataBaseContext, DataBaseContext>();
 builder.Services.AddScoped<IGetUsersService, GetUsersService>();
+builder.Services.AddScoped<IGetRolesService, GetRolesService>();
 
 #endregion
 

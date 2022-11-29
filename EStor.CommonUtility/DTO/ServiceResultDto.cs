@@ -32,6 +32,6 @@ namespace EStor.CommonUtility.DTO
 
         public string Message { get; set; }
 
-        public TOtherServiceResult OtherServiceResultData { get; set; }
+        public TOtherServiceResult Data { get; set; }
     }
 }

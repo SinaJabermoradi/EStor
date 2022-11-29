@@ -4,7 +4,7 @@ public class UserRole
 {
     public long Id { get; set; }
 
-    public Roles Role { get; set; }
+    public string Name{ get; set; }
 
     /// <summary>
     /// برای ایجاد رابطه ی چند به چند از این پراپرتی و کلاس (( یوزر این رول )) استفاده کردیم

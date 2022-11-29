@@ -21,30 +21,17 @@ namespace EStor.Persistence.Context
 
         #endregion
 
-
-        #region ذخیره کردن دیتا
-
-        public override int SaveChanges()
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            return base.SaveChanges();
+            modelBuilder.Entity<UserRole>().HasData(new UserRole 
+                { Id = 1, Name = EStor.CommonUtility.Roles.Roles.Admin });
+           
+            modelBuilder.Entity<UserRole>().HasData(new UserRole
+                { Id = 2, Name = EStor.CommonUtility.Roles.Roles.Operator });
+
+            modelBuilder.Entity<UserRole>().HasData(new UserRole
+                {
+                    Id = 3 , Name =  EStor.CommonUtility.Roles.Roles.Customer});
         }
-
-        public override int SaveChanges(bool acceptAllChangesOnSuccess)
-        {
-            return base.SaveChanges(acceptAllChangesOnSuccess);
-        }
-
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
-        {
-            return base.SaveChangesAsync(cancellationToken);
-        }
-
-        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = new CancellationToken())
-        {
-            return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
-        }
-
-        #endregion
-
     }
 }
