@@ -62,8 +62,7 @@ namespace EStor.Persistence.Context
 
             #endregion
 
-            modelBuilder.Entity<User>().HasIndex(user => user.Email).IsUnique();
-
+            modelBuilder.Entity<User>().HasIndex(user => user.Email).IsUnique(); // برای اینکه در بیزینس یا منطق برنامه ی ما ===> ایمیل کاربر خیلی مهمه و در واقع تعیین کننده ی هویت ِکاربر هست ===> ما از ایندکس استفاده کردیم تا مطمئن بشیم که ایمیل کاربران کاملا منحصر به فرد و غیر تکراری است ====> یعنی به کمک ِ این قطعه کد ، کاری کردیم که ایمیل های تکراری نتونن وارد برنامه بشن   
 
             modelBuilder.Entity<User>().HasQueryFilter(user=> !user.IsRemoved); // به کمک این قطعه کد مشخص می کنیم که انتیتی یوزر ، فقط اون یوزر ها یا کاربرانی رو برای من لود کن که (( ایز ریموو )) نباشن
 
