@@ -1,5 +1,6 @@
 ﻿using EStor.Application.Interfaces.Contexts;
 using EStor.CommonUtility.DTO;
+using Microsoft.EntityFrameworkCore;
 
 namespace EStor.Application.Services.Users.CommandsService.EditUser;
 
@@ -72,7 +73,7 @@ public class EditUserService : IEditUserService
                 Message = "ویرایش کاربر انجام شد"
             };
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return new ServiceResultDto
             {
