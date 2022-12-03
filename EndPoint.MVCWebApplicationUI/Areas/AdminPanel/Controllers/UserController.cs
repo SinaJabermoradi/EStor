@@ -1,4 +1,7 @@
-﻿using EStor.Application.Services.Users.CommandsService.RegisterUser;
+﻿using EStor.Application.Services.Users.CommandsService.EditUser;
+using EStor.Application.Services.Users.CommandsService.RegisterUser;
+using EStor.Application.Services.Users.CommandsService.RemoveUser;
+using EStor.Application.Services.Users.CommandsService.UserStatusChange;
 using EStor.Application.Services.Users.QueriesService.GetRoles;
 using EStor.Application.Services.Users.QueriesService.GetUsers;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +18,9 @@ namespace EndPoint.MVCWebApplicationUI.Areas.AdminPanel.Controllers
         private readonly IGetUsersService _usersService;
         private readonly IGetRolesService _rolesService;
         private readonly IRegisterUserService _registerUserService;
+        private readonly IRemoveUserService _removeUserService;
+        private readonly IUserStatusChangeService _userStatusChangeService;
+        private readonly IEditUserService _editUserService;
 
         #endregion
 
@@ -23,13 +29,19 @@ namespace EndPoint.MVCWebApplicationUI.Areas.AdminPanel.Controllers
 
         #region Constructor
 
-        public UserController(IGetUsersService usersService , 
-                                              IGetRolesService rolesService,
-                                              IRegisterUserService registerUserService)
+        public UserController(IGetUsersService usersService,
+                        IGetRolesService rolesService,
+                        IRegisterUserService registerUserService ,
+                        IRemoveUserService removeUserService,
+                        IUserStatusChangeService userStatusChangeService,
+                        IEditUserService editUserService)
         {
             _usersService = usersService;
             _rolesService = rolesService;
             _registerUserService = registerUserService;
+            _removeUserService = removeUserService;
+            _userStatusChangeService = userStatusChangeService;
+            _editUserService = editUserService;
         }
 
         #endregion
@@ -37,8 +49,8 @@ namespace EndPoint.MVCWebApplicationUI.Areas.AdminPanel.Controllers
         #region ActionMethod
 
         [HttpGet]
-        public IActionResult Index(string searchKey, 
-                                                      int page = 1)
+        public IActionResult Index(string searchKey
+                     ,int page = 1)
         {
             return View(_usersService.Execute(new GetUserRequestDto
             {
@@ -50,24 +62,24 @@ namespace EndPoint.MVCWebApplicationUI.Areas.AdminPanel.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Roles = new SelectList(_rolesService.Execute().Data,"Id","Name");
+            ViewBag.Roles = new SelectList(_rolesService.Execute().Data, "Id", "Name");
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(string FullName ,
-                                                        string Email , 
-                                                        long RoleId , 
-                                                        string Password , 
-                                                        string RePassword)
+        public IActionResult Create(string FullName
+                   , string Email
+                   , long RoleId
+                   , string Password
+                   , string RePassword)
         {
             var result = _registerUserService.Execute(new RequestRegisterUserDto
             {
                 FullName = FullName,
-                Email = Email ,
-                Password = Password ,
-                RePassword = RePassword ,
-               Roles = new List<RolesInRegisterUserDto>
+                Email = Email,
+                Password = Password,
+                RePassword = RePassword,
+                Roles = new List<RolesInRegisterUserDto>
                {
                    new RolesInRegisterUserDto
                    {
@@ -79,6 +91,36 @@ namespace EndPoint.MVCWebApplicationUI.Areas.AdminPanel.Controllers
         }
 
 
+        [HttpPost]
+        public IActionResult Delete(long UserId)
+        {
+            return Json(_removeUserService.Execute(UserId));
+        }
+
+
+        [HttpPost]
+        public IActionResult UserStatusChange(long UserId)
+        {
+            return Json(_userStatusChangeService.Execute(UserId));
+        }
+
+
+        [HttpPost]
+        public IActionResult Edit(long UserId 
+                       , string FullName
+                       , string Email
+                       , string Password
+                       , string RePassword)
+        {
+            return Json(_editUserService.Execute(new RequestEditUserDto
+            {
+                UserId = UserId,
+                FullName = FullName,
+                Email = Email,
+                Password = Password,
+                RePassword = RePassword
+            }));
+        }
         #endregion
 
         #endregion
