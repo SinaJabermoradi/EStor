@@ -1,4 +1,8 @@
 ﻿using EStor.Application.Interfaces.Contexts;
+using EStor.Application.Services.Users.CommandsService.EditUser;
+using EStor.Application.Services.Users.CommandsService.RegisterUser;
+using EStor.Application.Services.Users.CommandsService.RemoveUser;
+using EStor.Application.Services.Users.CommandsService.UserStatusChange;
 using EStor.Application.Services.Users.QueriesService.GetRoles;
 using EStor.Application.Services.Users.QueriesService.GetUsers;
 using EStor.Persistence.Context;
@@ -22,6 +26,12 @@ var builder = WebApplication.CreateBuilder(args); // به کمک این متد �
 builder.Services.AddScoped<IDataBaseContext, DataBaseContext>();
 builder.Services.AddScoped<IGetUsersService, GetUsersService>();
 builder.Services.AddScoped<IGetRolesService, GetRolesService>();
+builder.Services.AddScoped<IRegisterUserService, RegisterUserService>();
+builder.Services.AddScoped<IRemoveUserService, RemoveUserService>();
+builder.Services.AddScoped<IUserStatusChangeService, UserStatusChangeService>();
+builder.Services.AddScoped<IEditUserService, EditUserService>();
+
+
 
 #endregion
 
