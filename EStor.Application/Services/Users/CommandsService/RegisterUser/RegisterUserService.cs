@@ -11,12 +11,10 @@ public class RegisterUserService : IRegisterUserService
     #region Filds
 
     private readonly IDataBaseContext _context;
-    private List<UserInRole> _userInRoles;
 
     #endregion
 
     #endregion
-
 
     #region Behavior
 
@@ -80,7 +78,7 @@ public class RegisterUserService : IRegisterUserService
                     }
                 };
 
-            if (request.Password != request.Password)
+            if (request.Password != request.RePassword)
                 return new ServiceResultDto<ResultRegisterUserDto>
                 {
                     IsSuccess = false,
@@ -95,21 +93,24 @@ public class RegisterUserService : IRegisterUserService
             {
                 FullName = request.FullName,
                 Email = request.Email,
+                Password = request.Password
             };
+
+            List<UserRole> usersRoles = new List<UserRole>();
 
             foreach (var role in request.Roles)
             {
-                var roles = _context.Roles.Find(role.Id);
-                _userInRoles.Add(new UserInRole
+                Role roles = _context.Roles.Find(role.Id);
+                usersRoles.Add(new UserRole
                 {
                     User = user,
                     UserId = user.Id,
-                    UserRole = roles,
+                    Role = roles,
                     UserRoleId = roles.Id
                 });
             }
 
-            user.UserInRoles = _userInRoles;
+            user.UsersRoles = usersRoles;
 
             _context.Users.Add(user);
 
