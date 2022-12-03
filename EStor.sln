@@ -17,17 +17,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{37171867-10A6-44B0-887D-B2B116CB844A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EStor.Domain", "EStor.Domain\EStor.Domain.csproj", "{BB37FE9B-874C-4233-BF31-52BFF3E5A98B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EStor.Domain", "EStor.Domain\EStor.Domain.csproj", "{BB37FE9B-874C-4233-BF31-52BFF3E5A98B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EStor.Application", "EStor.Application\EStor.Application.csproj", "{E89764DE-EE85-40BE-8E2F-8C716678A537}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EStor.Application", "EStor.Application\EStor.Application.csproj", "{E89764DE-EE85-40BE-8E2F-8C716678A537}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EStor.Infrastructure", "EStor.Infrastructure\EStor.Infrastructure.csproj", "{55BE2693-6B51-4924-875F-D73C3E2BC1F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EStor.Infrastructure", "EStor.Infrastructure\EStor.Infrastructure.csproj", "{55BE2693-6B51-4924-875F-D73C3E2BC1F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EStor.Persistence", "EStor.Persistence\EStor.Persistence.csproj", "{782C2586-C59E-478C-BE74-D13DB2DB299C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EStor.Persistence", "EStor.Persistence\EStor.Persistence.csproj", "{782C2586-C59E-478C-BE74-D13DB2DB299C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EStor.CommonUtility", "EStor.CommonUtility\EStor.CommonUtility.csproj", "{0775476D-B6A4-44FE-AA18-79095049BA5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EStor.CommonUtility", "EStor.CommonUtility\EStor.CommonUtility.csproj", "{0775476D-B6A4-44FE-AA18-79095049BA5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EndPoint.MVCWebApplicationUI", "EndPoint.MVCWebApplicationUI\EndPoint.MVCWebApplicationUI.csproj", "{84648B76-9A1E-4179-A5BA-5E98298C97FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EndPoint.MVCWebApplicationUI", "EndPoint.MVCWebApplicationUI\EndPoint.MVCWebApplicationUI.csproj", "{84648B76-9A1E-4179-A5BA-5E98298C97FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

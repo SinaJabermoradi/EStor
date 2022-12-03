@@ -30,6 +30,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\Sweetalert2\sweetalert2.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\EStor.Persistence\EStor.Persistence.csproj" />
   </ItemGroup>
 
