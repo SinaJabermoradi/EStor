@@ -13,9 +13,9 @@ namespace EStor.Application.Interfaces.Contexts
     {
         public DbSet<User> Users { get; set; }
 
-        public DbSet<UserRole> Roles { get; set; }
+        public DbSet<Role> Roles { get; set; }
 
-        public DbSet<UserInRole> UserInRoles { get; set; }
+        public DbSet<UserRole> UsersRoles { get; set; }
 
         public int SaveChanges();
 
