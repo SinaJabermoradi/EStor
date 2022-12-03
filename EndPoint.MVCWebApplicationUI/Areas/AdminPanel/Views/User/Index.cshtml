@@ -54,22 +54,22 @@
                                                         value = "even";
                                                     else
                                                         value = "odd";
-                                                    <tr role="row" class="@value">
-                                                        <td class="sorting_1">@user.FullName</td>
-                                                        <td>@user.Email</td>
-                                                        <td>
-                                                            <button class="btn mr-1 btn-round shadow-z-2  btn-info" onclick="ShowModalEdituser('@user.Id' , '@user.FullName',@user.Email)">ویرایش</button>
-                                                            <button class="btn mr-1 btn-round shadow-z-2  btn-danger" onclick="DeleteUser('@user.Id')">حذف</button>
+                                                            <tr role="row" class="@value">
+                                                                <td class="sorting_1">@user.FullName</td>
+                                                                <td>@user.Email</td>
+                                                                <td>
+                                                                    <button class="btn mr-1 btn-round shadow-z-2  btn-info" onclick="ShowModalEdituser('@user.Id' , '@user.FullName','@user.Email','@user.Password','@user.RePassword')">ویرایش</button>
+                                                                    <button class="btn mr-1 btn-round shadow-z-2  btn-danger" onclick="DeleteUser('@user.Id')">حذف</button>
                                                             @if (user.IsActive)
                                                             {
-                                                                <button class="btn mr-1 btn-round shadow-z-2  btn-warning" onclick="UserSatusChange('@user.Id')">غیر فعال</button>
+                                                                                <button class="btn mr-1 btn-round shadow-z-2  btn-warning" onclick="UserSatusChange('@user.Id')">غیر فعال</button>
                                                             }
                                                             else
                                                             {
-                                                                <button class="btn mr-1 btn-round shadow-z-2  btn-success" onclick="UserSatusChange('@user.Id')"> فعال </button>
+                                                                                <button class="btn mr-1 btn-round shadow-z-2  btn-success" onclick="UserSatusChange('@user.Id')"> فعال </button>
                                                             }
-                                                        </td>
-                                                    </tr>
+                                                                </td>
+                                                            </tr>
                                                 }
                                             </tbody>
                                         </table>
@@ -155,58 +155,59 @@
     }
 
 
-    function UserSatusChange(UserId) {
-        swal.fire({
-            title: 'تغییر وضعیت کاربر',
-            text: "از تغییر وضعیت کاربر مطمئن هستید؟",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#7cacbe',
-            confirmButtonText: 'بله ، تغییر وضعیت انجام شود',
-            cancelButtonText: 'خیر'
-        }).then((result) => {
-            if (result.value) {
+     function UserSatusChange(UserId) {
+            swal.fire({
+                title: 'تغییر وضعیت کاربر',
+                text: "از تغییر وضعیت کاربر مطمئن هستید؟",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#7cacbe',
+                confirmButtonText: 'بله ، تغییر وضعیت انجام شود',
+                cancelButtonText: 'خیر'
+            }).then((result) => {
+                if (result.value) {
 
-                var postData = {
-                    'UserId': UserId,
-                };
+                    var postData = {
+                        'UserId': UserId,
+                    };
 
-                $.ajax({
-                    contentType: 'application/x-www-form-urlencoded',
-                    dataType: 'json',
-                    type: "POST",
-                    url: "UserStatusChange",
-                    data: postData,
-                    success: function (data) {
-                        if (data.isSuccess == true) {
-                            swal.fire(
-                                'موفق!',
-                                data.message,
-                                'success'
-                            ).then(function (isConfirm) {
-                                location.reload();
-                            });
+                    $.ajax({
+                        contentType: 'application/x-www-form-urlencoded',
+                        dataType: 'json',
+                        type: "POST",
+                        url: "UserStatusChange",
+                        data: postData,
+                        success: function (data) {
+                            if (data.isSuccess == true) {
+                                swal.fire(
+                                    'موفق!',
+                                    data.message,
+                                    'success'
+                                ).then(function (isConfirm) {
+                                    location.reload();
+                                });
+                            }
+                            else {
+
+                                swal.fire(
+                                    'هشدار!',
+                                    data.message,
+                                    'warning'
+                                );
+
+                            }
+                        },
+                        error: function (request, status, error) {
+                            alert(request.responseText);
                         }
-                        else {
 
-                            swal.fire(
-                                'هشدار!',
-                                data.message,
-                                'warning'
-                            );
+                    });
 
-                        }
-                    },
-                    error: function (request, status, error) {
-                        alert(request.responseText);
-                    }
+                }
+            })
+        }
 
-                });
-
-            }
-        })
-    }
 
 
     function Edituser() {
@@ -214,11 +215,16 @@
         var userId = $("#Edit_UserId").val();
         var fullName = $("#Edit_Fullname").val();
         var email =$("#Edit_Email").val();
+        var password = $("#Edit_Password").val();
+        var rePassword = $("#Edit_RePassword").val();
+        
 
         var postData = {
             'UserId': userId,
             'FullName': fullName,
             'Email' : email,
+            'Password' : password ,
+            'RePassword' : rePassword
         };
 
 
@@ -256,10 +262,13 @@
     }
 
 
-    function ShowModalEdituser(UserId, FullName,Email) {
+    function ShowModalEdituser(UserId, FullName,Email,Password,RePassword) {
         $('#Edit_UserId').val(UserId)
         $('#Edit_Fullname').val(FullName)
         $('#Edit_Email').val(Email)
+        $('#Edit_Password').val(Password)
+        $('#Edit_RePassword').val(RePassword)
+        
 
         $('#EditUser').modal('show');
     }
@@ -278,7 +287,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">ویرایش کاربر</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle"><i class="icon-user"></i>     ویرایش کاربر     </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -287,16 +296,20 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 mb-1">
                     <fieldset class="form-group">
                         <input type="hidden" id="Edit_UserId" />
-                        <label for="basicInput">نام و نام خانوادگی</label>
+                        <label for="Edit_Fullname">نام و نام خانوادگی</label>
                         <input type="text" class="form-control" id="Edit_Fullname">
-                        <label for="basicInput">پست الکترونیک</label>
+                        <label for="Edit_Email">پست الکترونیک</label>
                         <input type="email" class="form-control" id="Edit_Email">
+                        <label for="Edit_Password">رمز عبور جدید</label>
+                        <input type="password" class="form-control" id="Edit_Password">
+                        <label for="Edit_RePassword">تکرار رمز عبور جدید </label>
+                        <input type="password" class="form-control" id="Edit_RePassword">
                     </fieldset>
                 </div>
             </div>
-            <div class="modal-footer">
-                <a class="btn btn-secondary" data-dismiss="modal">بستن</a>
-                <a class="btn btn-primary" onclick="Edituser()">اعمال تغییرات</a>
+            <div class="modal-footer" style="background-color: gray">
+                <a class="btn mr-1 btn-round shadow-z-2 btn-danger" data-dismiss="modal">بستن</a>
+                <a class="btn mr-1 btn-round shadow-z-2 btn-success" onclick="Edituser()">اعمال تغییرات</a>
             </div>
         </div>
     </div>
