@@ -1,4 +1,5 @@
 ﻿@using EStor.Application.Services.Users.QueriesService.GetUsers
+@using Microsoft.CodeAnalysis.VisualBasic.Syntax
 @model ResultGetUserDto
 @{
     ViewData["Title"] = "Index";
@@ -20,7 +21,7 @@
                 </div>
                 <div class="card-body collapse show">
                     <div class="card-block card-dashboard">
-                        <p class="card-text">داده های جداول اغلب ویژگی های پیش فرض را فعال می کنند، بنابراین همه چیزهایی که باید برای استفاده از آن با استفاده از ables خود انجام دهید، تماس با تابع ساخت است: $ (). DataTable ()؛</p>
+                        <p class="card-text">لیست کاربران فروشگاه اینترنتی کالا مارکت</p>
                         <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
 
                             <!-- Search & Select بالای صفحه -->
@@ -28,14 +29,14 @@
                                 <div class="col-sm-12 col-md-6">
                                     <div class="dataTables_length" id="DataTables_Table_0_length">
                                         <label>
-                                           در هر صفحه 
+                                            در هر صفحه
                                             <select name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" class="form-control form-control-sm">
                                                 <option value="10">10</option>
                                                 <option value="25">25</option>
                                                 <option value="50">50</option>
                                                 <option value="100">100</option>
-                                            </select> 
-                                           عضو از کابران سایت را نمایش بده
+                                            </select>
+                                            عضو از کابران سایت را نمایش بده
                                         </label>
                                     </div>
                                 </div>
@@ -43,7 +44,7 @@
                                     <div id="DataTables_Table_0_filter" class="dataTables_filter">
                                         <label>
                                             جستجو:
-                                            <input type="search" class="form-control form-control-sm" placeholder="نام یا ایمیل کاربر مورد نظرتان را وارد کنید" aria-controls="DataTables_Table_0" style="width: 390px;"/>
+                                            <input type="search" class="form-control form-control-sm" placeholder="نام یا ایمیل کاربر مورد نظرتان را وارد کنید" aria-controls="DataTables_Table_0" style="width: 390px;" />
                                         </label>
                                     </div>
                                 </div>
@@ -70,9 +71,17 @@
                                                     <td class="sorting_1">@user.FullName</td>
                                                     <td>@user.Email</td>
                                                     <td>
-                                                        <button class="btn mr-1 btn-round shadow-z-2 btn-info">ویرایش</button>
-                                                        <button class="btn mr-1 btn-round shadow-z-2 btn-danger">حذف کردن</button>
-                                                        <button class="btn mr-1 btn-round shadow-z-2 btn-warning">غیر فعال</button>
+                                                        <button class="btn mr-1 btn-round shadow-z-2 btn-info" onclick="ShowModalEdituser(@user.Id , @user.FullName , @user.Email , @user.Password , @user.RePassword)">ویرایش</button>
+                                                        <button class="btn mr-1 btn-round shadow-z-2 btn-danger" onclick="DeleteUser(@user.Id)">حذف کردن</button>
+                                                        @if (user.IsActive == true)
+                                                        {
+                                                            <button class="btn mr-1 btn-round shadow-z-2 btn-success" onclick="UserSatusChange(@user.Id)"> غیر فعال </button>
+                                                        }
+                                                        else
+                                                        {
+                                                            <button class="btn mr-1 btn-round shadow-z-2 btn-warning" onclick="UserSatusChange(@user.Id)"> فعال </button>
+                                                        }
+
                                                     </td>
                                                 </tr>
                                             }
@@ -87,7 +96,6 @@
                                 </div>
                             </div>
                             <!-- جدول لیست کاربران سایت-->
-                            
                             <!-- Pagination پایین صفحه-->
                             <div class="row">
                                 <div class="col-sm-12 col-md-5">
@@ -136,4 +144,220 @@
     </div>
 </section>
 
+@section Scripts
+{
+    <script>
 
+
+    function DeleteUser(UserId) {
+        swal.fire({
+            title: 'حذف کاربر',
+            text: "کاربر گرامی از حذف کاربر مطمئن هستید؟",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#7cacbe',
+            confirmButtonText: 'بله ، کاربر حذف شود',
+            cancelButtonText: 'خیر'
+        }).then((result) => {
+            if (result.value) {
+                var postData = {
+                    'UserId': UserId,
+                };
+
+                $.ajax({
+                    contentType: 'application/x-www-form-urlencoded',
+                    dataType: 'json',
+                    type: "POST",
+                    url: "Delete",
+                    data: postData,
+                    success: function (data) {
+                        if (data.isSuccess == true) {
+                            swal.fire(
+                                'موفق!',
+                                data.message,
+                                'success'
+                            ).then(function (isConfirm) {
+                                location.reload();
+                            });
+                        }
+                        else {
+
+                            swal.fire(
+                                'هشدار!',
+                                data.message,
+                                'warning'
+                            );
+
+                        }
+                    },
+                    error: function (request, status, error) {
+                        alert(request.responseText);
+                    }
+
+                });
+
+            }
+        })
+    }
+
+
+    function UserSatusChange(UserId) {
+        swal.fire({
+            title: 'تغییر وضعیت کاربر',
+            text: "کاربر گرامی از تغییر وضعیت کاربر مطمئن هستید؟",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#7cacbe',
+            confirmButtonText: 'بله ، تغییر وضعیت انجام شود',
+            cancelButtonText: 'خیر'
+        }).then((result) => {
+            if (result.value) {
+
+                var postData = {
+                    'UserId': UserId,
+                };
+
+                $.ajax({
+                    contentType: 'application/x-www-form-urlencoded',
+                    dataType: 'json',
+                    type: "POST",
+                    url: "UserSatusChange",
+                    data: postData,
+                    success: function (data) {
+                        if (data.isSuccess == true) {
+                            swal.fire(
+                                'موفق!',
+                                data.message,
+                                'success'
+                            ).then(function (isConfirm) {
+                                location.reload();
+                            });
+                        }
+                        else {
+
+                            swal.fire(
+                                'هشدار!',
+                                data.message,
+                                'warning'
+                            );
+
+                        }
+                    },
+                    error: function (request, status, error) {
+                        alert(request.responseText);
+                    }
+
+                });
+
+            }
+        })
+    }
+
+
+    function Edituser() {
+
+        var userId = $("#Edit_UserId").val();
+        var fullName = $("#Edit_FullName").val();
+        var email =$("#Edit_Email").val();
+        var password =$("#Edit_Password").val();
+        var rePassword =$("#Edit_RePassword").val();
+        
+        var postData = {
+            'UserId': userId,
+            'FullName': fullName,
+            'Email' : email,
+            'Password' : password , 
+            'RePassword' : rePassword
+        };
+
+
+        $.ajax({
+            contentType: 'application/x-www-form-urlencoded',
+            dataType: 'json',
+            type: "POST",
+            url: "Edit",
+            data: postData,
+            success: function (data) {
+                if (data.isSuccess == true) {
+                    swal.fire(
+                        'موفق!',
+                        data.message,
+                        'success'
+                    ).then(function (isConfirm) {
+                        location.reload();
+                    });
+                }
+                else {
+                    swal.fire(
+                        'هشدار!',
+                        data.message,
+                        'warning'
+                    );
+                }
+            },
+            error: function (request, status, error) {
+                alert(request.responseText);
+            }
+        });
+
+        $('#EditUser').modal('hide');
+
+    }
+
+
+    function ShowModalEdituser(UserId, FullName,Email,Password,RePassword) {
+        $('#Edit_UserId').val(UserId)
+        $('#Edit_FullName').val(FullName)
+        $('#Edit_Email').val(Email)
+        $('#Edit_Password').val(Password)
+        $('#Edit_RePassword').val(RePassword)
+
+
+        $('#EditUser').modal('show');
+
+    }
+
+</script>
+
+}
+
+
+
+
+@section Modals
+{
+    <!-- Modal Edit User -->
+    <div class="modal fade" id="EditUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">ویرایش کاربر</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-xl-12 col-lg-12 col-md-12 mb-1">
+                        <fieldset class="form-group">
+                            <input type="hidden" id="Edit_UserId" />
+                            <label for="basicInput">نام و نام خانوادگی</label>
+                            <input type="text" class="form-control" id="Edit_FullName">
+                            <label for="basicInput">پست الکترونیک</label>
+                            <input type="email" class="form-control" id="Edit_Email">
+                            <label for="basicInput">رمز عبور</label>
+                            <input type="password" class="form-control" id="Edit_Password">
+                            <label for="basicInput">تکرار رمز عبور</label>
+                            <input type="password" class="form-control" id="Edit_RePassword">
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a  class="btn btn-secondary" data-dismiss="modal">بستن</a>
+                    <a  class="btn btn-primary" onclick="Edituser()">اعمال تغییرات</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
