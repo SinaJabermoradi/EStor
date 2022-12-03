@@ -15,7 +15,7 @@ namespace EndPoint.MVCWebApplicationUI.Areas.AdminPanel.Controllers
     {
         #region Filds
 
-        private readonly IGetUsersService _usersService;
+        private readonly IGetUsersService _getUsersService;
         private readonly IGetRolesService _rolesService;
         private readonly IRegisterUserService _registerUserService;
         private readonly IRemoveUserService _removeUserService;
@@ -29,14 +29,14 @@ namespace EndPoint.MVCWebApplicationUI.Areas.AdminPanel.Controllers
 
         #region Constructor
 
-        public UserController(IGetUsersService usersService,
+        public UserController(IGetUsersService getUsersService,
                         IGetRolesService rolesService,
                         IRegisterUserService registerUserService ,
                         IRemoveUserService removeUserService,
                         IUserStatusChangeService userStatusChangeService,
                         IEditUserService editUserService)
         {
-            _usersService = usersService;
+            _getUsersService = getUsersService;
             _rolesService = rolesService;
             _registerUserService = registerUserService;
             _removeUserService = removeUserService;
@@ -52,7 +52,7 @@ namespace EndPoint.MVCWebApplicationUI.Areas.AdminPanel.Controllers
         public IActionResult Index(string searchKey
                      ,int page = 1)
         {
-            return View(_usersService.Execute(new GetUserRequestDto
+            return View(_getUsersService.Execute(new GetUserRequestDto
             {
                 Page = page,
                 SearchKey = searchKey
@@ -108,19 +108,19 @@ namespace EndPoint.MVCWebApplicationUI.Areas.AdminPanel.Controllers
         [HttpPost]
         public IActionResult Edit(long UserId 
                        , string FullName
-                       , string Email
-                       , string Password
-                       , string RePassword)
+                       , string Email)
         {
             return Json(_editUserService.Execute(new RequestEditUserDto
             {
                 UserId = UserId,
                 FullName = FullName,
                 Email = Email,
-                Password = Password,
-                RePassword = RePassword
             }));
+
         }
+
+
+
         #endregion
 
         #endregion
