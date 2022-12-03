@@ -108,13 +108,17 @@ namespace EndPoint.MVCWebApplicationUI.Areas.AdminPanel.Controllers
         [HttpPost]
         public IActionResult Edit(long UserId 
                        , string FullName
-                       , string Email)
+                       , string Email
+                       , string Password
+                       , string RePassword)
         {
             return Json(_editUserService.Execute(new RequestEditUserDto
             {
                 UserId = UserId,
                 FullName = FullName,
                 Email = Email,
+                Password = Password,
+                RePassword = RePassword
             }));
 
         }
