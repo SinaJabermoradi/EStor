@@ -1,6 +1,7 @@
 ﻿using EStor.Application.Interfaces.Contexts;
 using EStor.CommonUtility.DTO;
 using EStor.Domain.Entities.Users;
+using Microsoft.EntityFrameworkCore;
 
 namespace EStor.Application.Services.Users.CommandsService.RegisterUser;
 
@@ -126,13 +127,25 @@ public class RegisterUserService : IRegisterUserService
                 }
             };
         }
+        catch (DbUpdateException)
+        {
+            return new ServiceResultDto<ResultRegisterUserDto>
+            {
+                IsSuccess = false,
+                Message = "ایمیل وارد شده قبلا استفاده شده است !!  ",
+                Data = new ResultRegisterUserDto
+                {
+                    UserId = 0
+                }
+            };
+        }
         catch (Exception)
         {
             return new ServiceResultDto<ResultRegisterUserDto>
             {
                 IsSuccess = false,
                 Message = "ثبت نام کاربر انجام نشد !! ",
-                Data =
+                Data = new ResultRegisterUserDto
                 {
                     UserId = 0
                 }
