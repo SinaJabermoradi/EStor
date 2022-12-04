@@ -29,4 +29,8 @@
     <ProjectReference Include="..\EStor.Domain\EStor.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\Users\CommandsService\UserLogIn\" />
+  </ItemGroup>
+
 </Project>
