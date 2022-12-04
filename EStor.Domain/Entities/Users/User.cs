@@ -12,7 +12,7 @@ namespace EStor.Domain.Entities.Users
         public string FullName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public bool IsActive { get; set; } = false; // برای غیر فعال کردن یا فعال کردن برنامه مون به کار میره
+        public bool IsActive { get; set; }  // برای غیر فعال کردن یا فعال کردن برنامه مون به کار میره
         /*
         /// برای ایجاد رابطه ی چند به چند از این پراپرتی و کلاس (( یوزر این رول )) استفاده کردیم
        */
