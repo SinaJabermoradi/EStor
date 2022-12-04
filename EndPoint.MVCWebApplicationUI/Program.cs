@@ -2,10 +2,12 @@
 using EStor.Application.Services.Users.CommandsService.EditUser;
 using EStor.Application.Services.Users.CommandsService.RegisterUser;
 using EStor.Application.Services.Users.CommandsService.RemoveUser;
+using EStor.Application.Services.Users.CommandsService.UserLogIn;
 using EStor.Application.Services.Users.CommandsService.UserStatusChange;
 using EStor.Application.Services.Users.QueriesService.GetRoles;
 using EStor.Application.Services.Users.QueriesService.GetUsers;
 using EStor.Persistence.Context;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,6 +23,17 @@ var builder = WebApplication.CreateBuilder(args); // به کمک این متد �
 #region Configure Service()
 // Add services to the container.
 
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+}).AddCookie(options =>
+    {
+        options.LoginPath = new PathString("/Home/Index");
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(5.0);
+    });
+
 #region Service Dependency Injection تزریق وابستگی سرویس ها یا 
 
 builder.Services.AddScoped<IDataBaseContext, DataBaseContext>();
@@ -30,6 +43,7 @@ builder.Services.AddScoped<IRegisterUserService, RegisterUserService>();
 builder.Services.AddScoped<IRemoveUserService, RemoveUserService>();
 builder.Services.AddScoped<IUserStatusChangeService, UserStatusChangeService>();
 builder.Services.AddScoped<IEditUserService, EditUserService>();
+builder.Services.AddScoped<IUserLoginService, UserLoginService>();
 
 
 
@@ -67,6 +81,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.UseEndpoints(endpoints =>
 {
