@@ -1,5 +1,7 @@
-﻿using EStor.Application.Interfaces.Contexts;
+﻿using System.Text.RegularExpressions;
+using EStor.Application.Interfaces.Contexts;
 using EStor.CommonUtility.DTO;
+using EStor.CommonUtility;
 using EStor.Domain.Entities.Users;
 using Microsoft.EntityFrameworkCore;
 
@@ -39,7 +41,7 @@ public class RegisterUserService : IRegisterUserService
                 return new ServiceResultDto<ResultRegisterUserDto>
                 {
                     IsSuccess = false,
-                    Message = "لطفا نام و نام خانوادگی کاربر را وارد نمایید",
+                    Message = "لطفا نام کاربری را وارد نمایید",
                     Data = new ResultRegisterUserDto
                     {
                         UserId = 0
@@ -90,11 +92,31 @@ public class RegisterUserService : IRegisterUserService
                     }
                 };
 
+            // خفن روی ایمیل Validation یک
+            string emailRegex = @"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9.-]+\.[A-Z]{2,}$";
+            var match = Regex.Match(request.Email, emailRegex, RegexOptions.IgnoreCase);
+            if (!match.Success)
+            {
+                return new ServiceResultDto<ResultRegisterUserDto>
+                {
+                    IsSuccess = false,
+                    Message = "ایمیل خودرا به درستی وارد نمایید",
+                    Data = new ResultRegisterUserDto
+                    {
+                        UserId = 0,
+                    }
+                };
+            }
+
+            var passwordHasher = new PasswordHasher();
+            var hashedPassword = passwordHasher.HashPassword(request.Password);
+
             User user = new User
             {
                 FullName = request.FullName,
                 Email = request.Email,
-                Password = request.Password
+                Password = hashedPassword,
+                IsActive = true
             };
 
             List<UserRole> usersRoles = new List<UserRole>();
