@@ -123,7 +123,7 @@ public class RegisterUserService : IRegisterUserService
 
             foreach (var role in request.Roles)
             {
-                Role roles = _context.Roles.Find(role.Id);
+                var roles = _context.Roles.Find(role.Id);
                 usersRoles.Add(new UserRole
                 {
                     User = user,
