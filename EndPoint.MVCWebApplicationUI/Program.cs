@@ -1,4 +1,5 @@
 ﻿using EStor.Application.Interfaces.Contexts;
+using EStor.Application.Services.Products.FacadPattern;
 using EStor.Application.Services.Users.CommandsService.EditUser;
 using EStor.Application.Services.Users.CommandsService.RegisterUser;
 using EStor.Application.Services.Users.CommandsService.RemoveUser;
@@ -45,7 +46,11 @@ builder.Services.AddScoped<IUserStatusChangeService, UserStatusChangeService>();
 builder.Services.AddScoped<IEditUserService, EditUserService>();
 builder.Services.AddScoped<IUserLoginService, UserLoginService>();
 
+#region Facad Injection
 
+builder.Services.AddScoped<IProductFacad, ProductFacad>();
+
+#endregion
 
 #endregion
 
