@@ -4,6 +4,7 @@
 
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,24 +16,23 @@
     <link rel="stylesheet" href="~/WebApplicationTemplate/assets/css/vendor/bootstrap.css">
     <link rel="stylesheet" href="~/WebApplicationTemplate/assets/css/vendor/owl.carousel.min.css">
     <link rel="stylesheet" href="~/WebApplicationTemplate/assets/css/vendor/nice-select.css">
-    <link rel="stylesheet" href="~/WebApplicationTemplate/assets/css/vendor/jquery.jqZoom.css">
-    <link rel="stylesheet" href="~/WebApplicationTemplate/assets/css/vendor/sweetalert2.min.css">
     <!-- main-style---------------------------------->
     <link rel="stylesheet" href="~/WebApplicationTemplate/assets/css/main.css">
     <link rel="stylesheet" href="~/WebApplicationTemplate/assets/css/responsive.css">
 </head>
+
 <body>
     <!-- header-------------------------------->
     <header class="header-main">
         <div class="container-main">
             <div class="d-block">
                 <section class="h-main-row">
-                    <div class="col-lg-9 col-md-12 col-xs-12 pr">
+                    <div class="col-lg-9 col-xs-12 pr">
                         <div class="header-right">
                             <div class="col-lg-3 pr">
                                 <div class="header-logo row text-right">
                                     <a asp-action="Index" asp-controller="Home">
-                                        <img src="~/WebApplicationTemplate/assets/images/logo.png" alt="کالا مارکت">
+                                        <img src="~/WebApplicationTemplate/assets/images/logo.png" alt="فروشگاه اینترنتی کالا مارکت">
                                     </a>
                                 </div>
                             </div>
@@ -63,65 +63,6 @@
                                                 </div>
                                             </div>
                                         </form>
-                                        <div class="search-result">
-                                            <ul class="search-result-list mb-0">
-                                                <li>
-                                                    <a href="#">
-                                                        <i class="mdi mdi-clock-outline"></i>
-                                                        کالای دیجیتال
-                                                        <button class="btn btn-light btn-continue-search" type="submit">
-                                                            <i class="fa fa-angle-left"></i>
-                                                        </button>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">
-                                                        <i class="mdi mdi-clock-outline"></i>
-                                                        آرایشی و بهداشتی
-                                                        <button class="btn btn-light btn-continue-search" type="submit">
-                                                            <i class="fa fa-angle-left"></i>
-                                                        </button>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">
-                                                        <i class="mdi mdi-clock-outline"></i>
-                                                        گوشی موبایل
-                                                        <button class="btn btn-light btn-continue-search" type="submit">
-                                                            <i class="fa fa-angle-left"></i>
-                                                        </button>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">
-                                                        <i class="mdi mdi-clock-outline"></i>
-                                                        تبلت
-                                                        <button class="btn btn-light btn-continue-search" type="submit">
-                                                            <i class="fa fa-angle-left"></i>
-                                                        </button>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">
-                                                        <i class="mdi mdi-clock-outline"></i>
-                                                        لپ تاپ
-                                                        <button class="btn btn-light btn-continue-search" type="submit">
-                                                            <i class="fa fa-angle-left"></i>
-                                                        </button>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">
-                                                        <i class="mdi mdi-clock-outline"></i>
-                                                        دوربین
-                                                        <button class="btn btn-light btn-continue-search" type="submit">
-                                                            <i class="fa fa-angle-left"></i>
-                                                        </button>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                            <div class="localSearchSimple"></div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -151,7 +92,7 @@
                                                             <a href="#" class="account-link">تنظیمات</a>
                                                         </li>
                                                         <li class="account-item">
-                                                            <a asp-action="signout" asp-controller="Authentication" class="account-link">خروج</a>
+                                                            <a asp-action="SignOut" asp-controller="Authentication" class="account-link">خروج</a>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -160,11 +101,10 @@
                                         else
                                         {
                                             <div class="nav-account d-block pl">
-                                                <a asp-action="signup" asp-controller="Authentication">
+                                                <a asp-action="SignUp" asp-controller="Authentication" >
                                                     <span class="title-account">ثبت نام</span>
                                                 </a>
-
-                                                <a asp-action="signin" asp-controller="Authentication">
+                                                <a asp-action="SignIn" asp-controller="Authentication" >
                                                     <span class="title-account">ورود</span>
                                                 </a>
                                             </div>
@@ -1213,7 +1153,7 @@
     <!-- scroll_Progress------------------------->
     <div class="progress-wrap">
         <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
-            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0, -98" />
         </svg>
     </div>
     <!-- scroll_Progress------------------------->
@@ -1222,7 +1162,7 @@
 <!-- file js---------------------------------------------------->
 
 
-<script src="~/WebApplicationTemplate/~/WebApplicationTemplate/assets/js/vendor/jquery-3.2.1.min.js"></script>
+<script src="~/WebApplicationTemplate/assets/js/vendor/jquery-3.2.1.min.js"></script>
 <script src="~/WebApplicationTemplate/assets/js/vendor/bootstrap.js"></script>
 <!-- plugin----------------------------------------------------->
 <script src="~/WebApplicationTemplate/assets/js/vendor/owl.carousel.min.js"></script>
