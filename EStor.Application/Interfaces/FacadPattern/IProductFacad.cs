@@ -1,5 +1,6 @@
 ﻿using EStor.Application.Services.Products.CommandsService.AddNewCategory;
 using EStor.Application.Services.Products.CommandsService.AddNewProduct;
+using EStor.Application.Services.Products.CommandsService.RemoveProduct;
 using EStor.Application.Services.Products.QueriesService.GetAllCategories;
 using EStor.Application.Services.Products.QueriesService.GetCategories;
 using EStor.Application.Services.Products.QueriesService.GetProductForAdmin;
@@ -16,5 +17,8 @@ public interface IProductFacad
     /// دریافت لیست محصولات برای ادمین
     /// </summary>
     public IGetProductForAdminService GetProductForAdminService { get; }
-
+    /// <summary>
+    /// حذف یک محصول خاص از سایت توسط ادمین
+    /// </summary>
+    public IRemoveProductService RemoveProductService { get; }
 }

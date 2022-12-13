@@ -1,6 +1,7 @@
 ﻿using EStor.Application.Interfaces.Contexts;
 using EStor.Application.Services.Products.CommandsService.AddNewCategory;
 using EStor.Application.Services.Products.CommandsService.AddNewProduct;
+using EStor.Application.Services.Products.CommandsService.RemoveProduct;
 using EStor.Application.Services.Products.QueriesService.GetAllCategories;
 using EStor.Application.Services.Products.QueriesService.GetCategories;
 using EStor.Application.Services.Products.QueriesService.GetProductForAdmin;
@@ -68,6 +69,17 @@ public class ProductFacad : IProductFacad
         get
         {
             return _getProductForAdmin = _getProductForAdmin ?? new GetProductForAdminService(_context);
+        }
+    }
+
+
+
+    private IRemoveProductService _removeProduct;
+    public IRemoveProductService RemoveProductService
+    {
+        get
+        {
+            return _removeProduct = _removeProduct ?? new RemoveProductService(_context);
         }
     }
 }
