@@ -3,6 +3,7 @@ using EStor.Application.Services.Products.CommandsService.AddNewCategory;
 using EStor.Application.Services.Products.CommandsService.AddNewProduct;
 using EStor.Application.Services.Products.QueriesService.GetAllCategories;
 using EStor.Application.Services.Products.QueriesService.GetCategories;
+using EStor.Application.Services.Products.QueriesService.GetProductForAdmin;
 using Microsoft.AspNetCore.Hosting;
 
 namespace EStor.Application.Services.Products.FacadPattern;
@@ -56,6 +57,17 @@ public class ProductFacad : IProductFacad
         get
         {
             return _getAllCategories = _getAllCategories ?? new GetAllCategoriesService(_context);
+        }
+    }
+
+
+
+    private IGetProductForAdminService _getProductForAdmin;
+    public IGetProductForAdminService GetProductForAdminService
+    {
+        get
+        {
+            return _getProductForAdmin = _getProductForAdmin ?? new GetProductForAdminService(_context);
         }
     }
 }
