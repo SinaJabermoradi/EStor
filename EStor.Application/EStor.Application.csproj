@@ -33,9 +33,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Services\Products\CommandsService\RemoveProduct\" />
     <Folder Include="Services\Products\FacadPattern\" />
     <Folder Include="Services\Products\QueriesService\GetCategories\" />
     <Folder Include="Services\Products\QueriesService\GetAllCategories\" />
+    <Folder Include="Services\Products\QueriesService\GetProductForAdmin\" />
+    <Folder Include="Services\Products\QueriesService\GetProductDetailForAdmin\" />
     <Folder Include="Services\Users\CommandsService\UserLogIn\" />
   </ItemGroup>
 
