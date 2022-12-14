@@ -18,9 +18,10 @@ namespace EndPoint.MVCWebApplicationUI.Areas.AdminPanel.Controllers
             _productFacad = productFacad;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int pageNumber = 1
+        , int countOfProductOnThePage = 20)
         {
-            return View();
+            return View(_productFacad.GetProductForAdminService.Execute(pageNumber,countOfProductOnThePage).Data);
         }
 
 
@@ -30,6 +31,7 @@ namespace EndPoint.MVCWebApplicationUI.Areas.AdminPanel.Controllers
             ViewBag.AllCategories = new SelectList(_productFacad.GetAllCategoriesService.Execute().Data, "CategoryId", "CategoryName");  // لیست تمامی دسته بندی محصولات موجود در سایت مون رو به کمک این کد به دست میاریم . در این لیست ، نام و آیدی اون دسته بندی ها رو داریم
             return View();
         }
+
 
 
         [HttpPost]
@@ -59,7 +61,20 @@ namespace EndPoint.MVCWebApplicationUI.Areas.AdminPanel.Controllers
             });
             return Json(Result);
         }
+
+
+
+        [HttpPost]
+        public IActionResult Delete(long productId)
+         {
+            return Json(_productFacad.RemoveProductService.Execute(productId));
+        }
+
+
+        [HttpGet]
+        public IActionResult Detail([FromQuery]long productId)
+        {
+            return View(_productFacad.GetProductDetailForAdminService.Execute(productId).Data);
+        }
     }
-
-
 }
