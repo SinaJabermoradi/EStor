@@ -4,6 +4,7 @@ using EStor.Application.Services.Products.CommandsService.AddNewProduct;
 using EStor.Application.Services.Products.CommandsService.RemoveProduct;
 using EStor.Application.Services.Products.QueriesService.GetAllCategories;
 using EStor.Application.Services.Products.QueriesService.GetCategories;
+using EStor.Application.Services.Products.QueriesService.GetProductDetailForAdmin;
 using EStor.Application.Services.Products.QueriesService.GetProductForAdmin;
 using Microsoft.AspNetCore.Hosting;
 
@@ -17,7 +18,7 @@ public class ProductFacad : IProductFacad
 
 
     public ProductFacad(IDataBaseContext context
-                , IHostingEnvironment environment) 
+                , IHostingEnvironment environment)
     {
         _context = context;
         _environment = environment;
@@ -45,16 +46,18 @@ public class ProductFacad : IProductFacad
 
 
     private AddNewProductService _addNewProduct;
-    public AddNewProductService AddNewProductService {
+    public AddNewProductService AddNewProductService
+    {
         get
         {
-            return _addNewProduct = _addNewProduct ?? new AddNewProductService(_context,_environment);
+            return _addNewProduct = _addNewProduct ?? new AddNewProductService(_context, _environment);
         }
     }
 
 
     private IGetAllCategoriesService _getAllCategories;
-    public IGetAllCategoriesService GetAllCategoriesService {
+    public IGetAllCategoriesService GetAllCategoriesService
+    {
         get
         {
             return _getAllCategories = _getAllCategories ?? new GetAllCategoriesService(_context);
@@ -80,6 +83,17 @@ public class ProductFacad : IProductFacad
         get
         {
             return _removeProduct = _removeProduct ?? new RemoveProductService(_context);
+        }
+    }
+
+
+
+    private IGetProductDetailForAdminService _getProductDetailForAdmin;
+    public IGetProductDetailForAdminService GetProductDetailForAdminService
+    {
+        get
+        {
+            return _getProductDetailForAdmin = _getProductDetailForAdmin ?? new GetProductDetailForAdminService(_context);
         }
     }
 }

@@ -3,6 +3,7 @@ using EStor.Application.Services.Products.CommandsService.AddNewProduct;
 using EStor.Application.Services.Products.CommandsService.RemoveProduct;
 using EStor.Application.Services.Products.QueriesService.GetAllCategories;
 using EStor.Application.Services.Products.QueriesService.GetCategories;
+using EStor.Application.Services.Products.QueriesService.GetProductDetailForAdmin;
 using EStor.Application.Services.Products.QueriesService.GetProductForAdmin;
 
 namespace EStor.Application.Services.Products.FacadPattern;
@@ -21,4 +22,8 @@ public interface IProductFacad
     /// حذف یک محصول خاص از سایت توسط ادمین
     /// </summary>
     public IRemoveProductService RemoveProductService { get; }
+    /// <summary>
+    /// جزئیات محصول رو برای ادمین بر می گرداند
+    /// </summary>
+    public IGetProductDetailForAdminService GetProductDetailForAdminService { get; }
 }
