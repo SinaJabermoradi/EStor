@@ -33,12 +33,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Services\Common\CommandsService\" />
+    <Folder Include="Services\Common\CommonFacad\" />
+    <Folder Include="Services\Common\QueriesService\GetMenuItem\" />
+    <Folder Include="Services\Common\QueriesService\GetCategoryForSearch\" />
     <Folder Include="Services\Products\CommandsService\RemoveProduct\" />
     <Folder Include="Services\Products\FacadPattern\" />
     <Folder Include="Services\Products\QueriesService\GetCategories\" />
     <Folder Include="Services\Products\QueriesService\GetAllCategories\" />
     <Folder Include="Services\Products\QueriesService\GetProductForAdmin\" />
     <Folder Include="Services\Products\QueriesService\GetProductDetailForAdmin\" />
+    <Folder Include="Services\Products\QueriesService\GetProductForSite\" />
+    <Folder Include="Services\Products\QueriesService\GetProductDetailForSite\" />
     <Folder Include="Services\Users\CommandsService\UserLogIn\" />
   </ItemGroup>
 

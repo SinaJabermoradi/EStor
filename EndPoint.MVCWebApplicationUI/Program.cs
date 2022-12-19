@@ -1,4 +1,7 @@
 ﻿using EStor.Application.Interfaces.Contexts;
+using EStor.Application.Services.Common.CommonFacad;
+using EStor.Application.Services.Common.QueriesService.GetCategoryForSearch;
+using EStor.Application.Services.Common.QueriesService.GetMenuItem;
 using EStor.Application.Services.Products.FacadPattern;
 using EStor.Application.Services.Users.CommandsService.EditUser;
 using EStor.Application.Services.Users.CommandsService.RegisterUser;
@@ -45,6 +48,9 @@ builder.Services.AddScoped<IRemoveUserService, RemoveUserService>();
 builder.Services.AddScoped<IUserStatusChangeService, UserStatusChangeService>();
 builder.Services.AddScoped<IEditUserService, EditUserService>();
 builder.Services.AddScoped<IUserLoginService, UserLoginService>();
+builder.Services.AddScoped<IGetMenuItemService, GetMenuItemService>();
+builder.Services.AddScoped<IGetCategoryForSearchService, GetCategoryForSearchService>();
+
 
 #region Facad Injection
 
