@@ -25,7 +25,7 @@ public class GetProductForAdminService:IGetProductForAdminService
                 Id=product.Id,
                 Name = product.Name,
                 Brand = product.Brand,
-                CategoryName = product.Category.Name,
+                Category = product.Category,
                 Description = product.Description,
                 Price = product.Price,
                 CountOfProductInInventory = product.CountOfProductInInventory,
