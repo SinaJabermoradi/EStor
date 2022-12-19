@@ -1,11 +1,14 @@
 ﻿using EStor.Application.Interfaces.Contexts;
 using EStor.Application.Services.Products.CommandsService.AddNewCategory;
 using EStor.Application.Services.Products.CommandsService.AddNewProduct;
+using EStor.Application.Services.Products.CommandsService.EditProduct;
 using EStor.Application.Services.Products.CommandsService.RemoveProduct;
 using EStor.Application.Services.Products.QueriesService.GetAllCategories;
 using EStor.Application.Services.Products.QueriesService.GetCategories;
 using EStor.Application.Services.Products.QueriesService.GetProductDetailForAdmin;
+using EStor.Application.Services.Products.QueriesService.GetProductDetailForSite;
 using EStor.Application.Services.Products.QueriesService.GetProductForAdmin;
+using EStor.Application.Services.Products.QueriesService.GetProductForSite;
 using Microsoft.AspNetCore.Hosting;
 
 namespace EStor.Application.Services.Products.FacadPattern;
@@ -94,6 +97,41 @@ public class ProductFacad : IProductFacad
         get
         {
             return _getProductDetailForAdmin = _getProductDetailForAdmin ?? new GetProductDetailForAdminService(_context);
+        }
+    }
+
+
+
+    private IEditProductService _editProduct;
+    public IEditProductService EditProductService
+    {
+        get
+        {
+            return _editProduct = _editProduct ?? new EditProductService(_context, _environment);
+        }
+    }
+
+
+
+
+    private IGetProductForSite _getProductForSite;
+    public IGetProductForSite GetProductForSite
+    {
+        get
+        {
+            return _getProductForSite = _getProductForSite ?? new GetProductForSite(_context);
+        }
+    }
+
+
+
+
+    private IGetProductDetailForSiteService _getProductDetailForSite;
+    public IGetProductDetailForSiteService GetProductDetailForSite
+    {
+        get
+        {
+            return _getProductDetailForSite = _getProductDetailForSite ?? new GetProductDetailForSiteService(_context);
         }
     }
 }
