@@ -43,6 +43,7 @@ public class GetProductDetailForAdminService : IGetProductDetailForAdminService
             Data = new ProductDetailForAdminDto
             {
                 Id = product.Id,
+                CategoryId = product.Category.Id,
                 Name = product.Name,
                 CategoryName = GetCategory(product.Category),
                 Brand = product.Brand,
