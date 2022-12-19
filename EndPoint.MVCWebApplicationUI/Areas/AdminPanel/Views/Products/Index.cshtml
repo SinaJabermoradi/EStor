@@ -47,14 +47,15 @@
                                                 @foreach (var product in Model.ProductsForAdmin)
                                                 {
                                                     <tr role="row" style="text-align: center;">
-                                                        <td style="padding-top: 23px">@product.Name</td>
-                                                        <td style="padding-top: 20px">@product.CategoryName</td>
-                                                        <td style="padding-top: 20px">@product.Brand</td>
-                                                        <td style="padding-top: 23px">@product.Price.ToString("n0") تومان </td>
-                                                        <td style="padding-top: 20px">@product.CountOfProductInInventory</td>
-                                                        <td style="padding-top: 19px">@product.IsThisProductBeDisplayedOnTheSite</td>
+                                                        <td id="ProductName" style="padding-top: 23px">@product.Name</td>
+                                                        <td id="ProductCategoryName" style="padding-top: 20px">@product.Category.Name</td>
+                                                        <td id="ProductBrand" style="padding-top: 20px">@product.Brand</td>
+                                                        <td id="ProductPrice" style="padding-top: 23px">@product.Price.ToString("n0") تومان </td>
+                                                        <td id="ProductInventory" style="padding-top: 20px">@product.CountOfProductInInventory</td>
+                                                        <td id="ProductDisplayed" style="padding-top: 19px">@product.IsThisProductBeDisplayedOnTheSite</td>
                                                         <td>
                                                             <a onclick="DeleteProduct('@product.Id')" class="btn mr-1 btn-round shadow-z-2 btn-danger">حذف</a>
+                                                            <a href="/adminpanel/products/edit/?productId=@product.Id" class="btn mr-1 btn-round shadow-z-2 btn-success">ویرایش</a>
                                                             <a href="/adminpanel/products/detail/?productId=@product.Id" class="btn mr-1 btn-round shadow-z-2 btn-info">اطلاعات بیشتر</a>
                                                         </td>
                                                     </tr>
@@ -65,8 +66,7 @@
                                 </div>
                                 <!-- PageInation-->
                                 <div class="  text-center">
-                                    <paging
-                                            total-records="Model.RowCount" 
+                                    <paging total-records="Model.RowCount"
                                             page-no="Model.CurrentPage"
                                             page-size="Model.CountOfProductOnThePage"
                                             show-prev-next="true"
@@ -92,61 +92,12 @@
 
 @section Scripts
 {
-    <script src="~/Sweetalert2/sweetalert2.min.js"></script>
+<script src="~/Sweetalert2/sweetalert2.min.js"></script>
 
-    <script>
-        
-            function DeleteProduct(productId) {
-        swal.fire({
-            title: 'حذف محصول',
-            text: "از حذف محصول مطمئن هستید؟",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#7cacbe',
-            confirmButtonText: 'بله ، محصول حذف شود',
-            cancelButtonText: 'خیر'
-        }).then((result) => {
-            if (result.value) {
-                var postData = {
-                    'productId': productId,
-                };
+<script>
+    
 
-                $.ajax({
-                    contentType: 'application/x-www-form-urlencoded',
-                    dataType: 'json',
-                    type: "POST",
-                    url: "Delete",
-                    data: postData,
-                    success: function (data) {
-                        if (data.isSuccess == true) {
-                            swal.fire(
-                                'موفق!',
-                                data.message,
-                                'success'
-                            ).then(function (isConfirm) {
-                                location.reload();
-                            });
-                        }
-                        else {
-
-                            swal.fire(
-                                'هشدار!',
-                                data.message,
-                                'warning'
-                            );
-
-                        }
-                    },
-                    error: function (request, status, error) {
-                        alert(request.responseText);
-                    }
-
-                });
-
-            }
-        })
-    }
-
-    </script>
+</script>
 }
+
+
