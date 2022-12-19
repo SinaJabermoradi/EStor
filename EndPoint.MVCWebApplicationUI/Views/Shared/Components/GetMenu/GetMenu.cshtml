@@ -1,0 +1,30 @@
+﻿@using EStor.Application.Services.Common.QueriesService.GetMenuItem
+@model List<MenuItemDto>
+
+@{
+    Layout = null;
+}
+
+
+@foreach (var mainMenu in Model)
+{
+    <li id="nav-menu-item" class="menu-item nav-overlay">
+        <a href="#" class="current-link-menu">
+            @mainMenu.Name
+        </a>
+        @if (mainMenu.InnerMenu.Count() > 0)
+        {
+            <ul class="sub-menu is-mega-menu-small">
+                @foreach (var innerMenu in mainMenu.InnerMenu)
+                {
+                    <li class="menu-mega-item menu-item-type-mega-menu item-small">
+                        <a href="~/products/index?categoryId=@innerMenu.CategoryId" class="mega-menu-link">
+                            @innerMenu.Name
+                        </a>
+                    </li>
+                }
+            </ul>
+        }
+    </li>
+}
+
