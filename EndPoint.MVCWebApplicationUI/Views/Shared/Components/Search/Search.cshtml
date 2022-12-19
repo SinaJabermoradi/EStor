@@ -1,0 +1,22 @@
+﻿@using EStor.Application.Services.Common.QueriesService.GetCategoryForSearch
+@model List<CategoryForSearchDto>
+
+@{
+    Layout = null;
+}
+
+<form  asp-action="Index" asp-controller="Products" class="form-search" method="get">
+    <input type="search" class="header-search-input" name="searchKey" placeholder="نام کالا، برند و یا دسته بندی ِمورد نظر خود را جستجو کنید…">
+    <div class="action-btns">
+        <button class="btn btn-search" type="submit">
+            <i class="fa fa-search"></i>
+        </button>
+        <div class="search-filter">
+            <div class="form-ui">
+                <div class="custom-select-ui">
+                    <select class="right" name="categoryId" asp-items="@(new SelectList(Model,"CategoryId","CategoryName"))"><option>همه دسته بندی ها</option></select>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
