@@ -1,0 +1,377 @@
+﻿@using EStor.Application.Services.Products.QueriesService.GetProductDetailForAdmin
+@model ProductDetailForAdminDto
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "ویرایش محصول";
+    Layout = "_AdminTemplateLayout";
+    int i = 0;
+}
+
+
+@section Css
+{
+<style>
+    .circelForm {
+        width: 60px;
+        height: 58px;
+        border-radius: 50%;
+        padding-top: 15px;
+        padding-right: 9px;
+    }
+
+    .deleteFeatuer {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        padding-top: 17px;
+    }
+
+    .trstyle {
+        text-align: center !important;
+    }
+
+    .tdstyle {
+        padding-top: 31px !important;
+    }
+</style>
+
+<link href="~/Sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+}
+
+
+
+
+<section class="basic-elements">
+    <div class="row">
+        <div class="col-sm-12">
+            <h2 class="content-header"><i class="ft-inbox"></i>       فرم ویرایش محصول          </h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title-wrap bar-success">
+                        <h4 class="card-title mb-0"><i class="ft-clipboard"></i>         در صورت نیاز اطلاعات محصول را ویرایش کنید             </h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="px-3">
+                        <div class="form">
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                                        <fieldset class="form-group">
+                                            <input type="hidden" class="form-control" id="ProductId" value="@Model.Id" />
+                                            <label for="Name">نام محصول </label>
+                                            <input type="text" class="form-control" id="Name" value="@Model.Name">
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                                        <fieldset class="form-group">
+                                            <label for="Brand"> برند </label>
+                                            <input type="text" class="form-control" id="Brand" value="@Model.Brand">
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                                        <fieldset class="form-group">
+                                            <label for="Price"> قیمت ( بر حسب تومان وارد کنید )</label>
+                                            <input type="number" class="form-control" id="Price" value="@Model.Price">
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                                        <fieldset class="form-group">
+                                            <label for="Inventory"> تعداد موجودی</label>
+                                            <input type="number" class="form-control" id="Inventory" value="@Model.CountOfProductInInventory">
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                                        <fieldset>
+                                            <div style="padding-top: 32px;" class="input-group">
+                                                <div class="input-group-prepend">
+                                                    @if (@Model.IsThisProductBeDisplayedOnTheSite)
+                                                    {
+                                                        <span class="input-group-text" id="checkbox-addon1">
+                                                            <input type="checkbox" aria-label="Checkbox for following text input" id="Displayed" checked="checked">
+                                                        </span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="input-group-text" id="checkbox-addon1">
+                                                            <input type="checkbox" aria-label="Checkbox for following text input" id="Displayed">
+                                                        </span>
+                                                    }
+                                                </div>
+                                                <label for="Displayed" class="form-control" aria-describedby="checkbox-addon1">    آیا این محصول در سایت نمایش داده شود  ؟    </label>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                                        <fieldset class="form-group">
+                                            <label for="Category">دسته بندی </label>
+                                            <p style="color: #aaa9a9; font-size: 12px; display: inline-block;"> ( لطفا دسته بندی محصولتان را مجددا انتخاب نمایید ) </p>
+                                            <select style="margin-top: -9px;" class="form-control" id="Category" asp-items="@ViewBag.AllCategories"></select>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-xl-12 col-lg-12 col-md-12 mb-1">
+                                        <fieldset class="form-group">
+                                            <label for="Description"> توضیحات</label>
+                                            <textarea id="Description" class="form-control " rows="5">@Model.Description</textarea>
+                                        </fieldset>
+                                    </div>
+
+                                    <hr />
+                                    <hr />
+                                    <hr />
+                                    <hr />
+                                    @*  <div class="col-md-12 col-lg-12 col-xl-12">
+                                        <div class="card">
+                                        <div class="card-header">
+                                        <div class="card-title-wrap bar-success">
+                                        <h4 class="card-title">ویرایش تصاویر  محصول</h4>
+                                        </div>
+                                        </div>
+                                        <div class="card-body">
+                                        <div class="card-block">
+                                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                        <ol class="carousel-indicators">
+                                        @for (int i = 0; i < Model.Images.Count; i++)
+                                        {
+                                        <li data-target="#carousel-example-generic" data-slide-to="@i" class=""></li>
+                                        }
+                                        </ol>
+                                        <div class="carousel-inner" role="listbox">
+                                        @foreach (var item in Model.Images)
+                                        {
+                                        <div class="carousel-item">
+                                        <a target="_blank" href="~/@item.ImageSrc">
+                                        <img src="~/@item.ImageSrc" alt="@Model.Name + @item.Id.ToString()">
+                                        </a>
+                                        </div>
+                                        listImage.Add( item.ImageSrc);
+                                        countOfListImage++;
+                                        }
+                                        </div>
+                                        <a class="carousel-control-prev" href="" role="button" data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">قبلی</span>
+                                        @countOfListImage --
+                                        </a>
+                                        <a class="carousel-control-next" href="" role="button" data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">بعدی</span>
+                                        @countOfListImage ++
+                                        </a>
+                                        </div>
+                                        </div>
+                                        </div>
+                                        </div>
+                                        </div>*@
+                                    <div class="col-md-12 col-lg-12 col-xl-12">
+                                        <h4>ویرایش تصاویر محصول</h4>
+                                        <p style="color: #aaa9a9; font-size: 12px;"> لطفا تصاویر محصول را مجددا از نو انتخاب نمایید </p>
+                                    </div>
+                                    <div class="col-md-12 col-lg-12 col-xl-12">
+                                        <fieldset class="form-group">
+                                            <label for="Images">تصاویر </label>
+                                            <input type="file" multiple class="form-control" accept="image/*" id="Images">
+                                        </fieldset>
+                                    </div>
+
+                                    <hr />
+                                    <hr />
+                                    <hr />
+                                    <hr />
+
+                                    <div class="col-md-12 col-lg-12 col-xl-12">
+                                        <h4>ویرایش ویژگی های محصول</h4>
+                                    </div>
+                                    <div class="col-xl-2 col-lg-6 col-md-12 mb-1">
+                                        <fieldset class="form-group">
+                                            <label for="txtDisplayName"> نام ویژگی </label>
+                                            <input type="text" class="form-control" id="txtDisplayName" placeholder="نام ویژگی" />
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-xl-2 col-lg-6 col-md-12 mb-1">
+                                        <fieldset class="form-group">
+                                            <label for="txtValue"> مقدار ویژگی </label>
+                                            <input type="text" class="form-control" id="txtValue" placeholder="مقدار ویژگی" />
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-xl-2 col-lg-6 col-md-12 mb-1">
+                                        <fieldset class="form-group">
+                                            <br />
+                                            <a class="btn shadow-z-2 circelForm btn-success" id="btnAddFeatures">افزودن</a>
+                                        </fieldset>
+                                    </div>
+
+                                    <br class="clear" />
+
+                                    <table id="tbl_Features" class="col-md-12 table table-bordered table-hover  table-condensed table-responsive">
+                                        <thead class="col-md-12">
+                                            <tr>
+                                                <th class="col-md-7">
+                                                    نام ویژگی
+                                                </th>
+                                                <th class="col-md-7">
+                                                    مقدار ویژگی
+                                                </th>
+                                                <th>
+
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                       @foreach(var item in Model.Featuers)
+                                                {
+                                                    <tr class="trstyle">
+                                                        <td class="tdstyle">
+                                                            @item.FeatureName
+                                                        </td>
+                                                        <td  class="tdstyle">
+                                                            @item.FeatureValue
+                                                        </td>
+                                                        <td class="tdstyle">
+                                                            <a class="deleteFeatuer idFeatures btnDelete btn shadow-z-2 btn-danger"> حذف </a> 
+                                                        </td>
+                                                    </tr>
+                                                }
+                                        </tbody>
+                                    </table>
+
+                                    <div class="col-xl-12 col-lg-12 col-md-12 mb-1">
+                                        <fieldset class="form-group">
+                                            <br />
+                                            <a id="btnAddProduct" class="btn mr-1 btn-round shadow-z-2 btn-success col-md-12"> اعمال ویرایش محصول </a>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section Scripts
+{
+
+    <script src="~/Sweetalert2/sweetalert2.min.js"></script>
+
+    <script>
+
+    $("#btnAddFeatures").on("click", function () {
+
+        var txtDisplayName = $("#txtDisplayName").val();
+        var txtValue = $("#txtValue").val();
+
+        if (txtDisplayName == "" || txtValue == "") {
+            swal.fire(
+                'هشدار!',
+                "نام و مقدار را باید وارد کنید",
+                'warning'
+            );
+        }
+        else {
+            $('#tbl_Features tbody').append('<tr class="trstyle"><td class="tdstyle">' + txtDisplayName + '</td><td  class="tdstyle">' + txtValue + '</td> <td> <a class="deleteFeatuer idFeatures btnDelete btn shadow-z-2 btn-danger"> حذف </a> </td> </tr>');
+            $("#txtDisplayName").val('');
+            $("#txtValue").val('');
+        }
+    });
+
+    $("#tbl_Features").on('click', '.idFeatures', function () {
+        $(this).closest('tr').remove();
+    });
+
+    $('#btnAddProduct').on('click', function () {
+   
+        var data = new FormData();
+
+        //دریافت مقادیر از تکس باکس ها و....
+        data.append("Id", $("#ProductId").val());
+        data.append("Name", $("#Name").val());
+        data.append("Brand", $("#Brand").val());
+        data.append("Description", $("#Description").val());
+        data.append("Price", parseFloat($("#Price").val()));
+        data.append("CountOfProductInInventory", Number($("#Inventory").val()));
+        data.append("IsThisProductBeDisplayedOnTheSite", $("#Displayed").attr("checked") ? true : false);
+        data.append("CategoryId", $('#Category').find('option:selected').val());
+
+
+
+        //دریافت عکس های انتخاب شده توسط کاربر و قرار دادن عکس ها در متغیر data
+        var productImages = document.getElementById("Images");
+
+        if (productImages.files.length > 0) {
+            for (var i = 0; i < productImages.files.length; i++) {
+                data.append('Image-' + i, productImages.files[i]);
+            }
+        }
+
+        //دریافت ویژگی های محصول از جدول
+        var dataFeaturesViewModel = $('#tbl_Features tr:gt(0)').map(function () {
+            return {
+                DisplayName: $(this.cells[0]).text(),
+                Value: $(this.cells[1]).text(),
+            };
+        }).get();
+
+        $.each(dataFeaturesViewModel, function (i, val) {
+            data.append('[' + i + '].FeaturesName', val.DisplayName);
+            data.append('[' + i + '].FeaturesValue', val.Value);
+
+        });
+
+
+
+
+
+        // ارسال اطلاعات بع کنترلر
+        var ajaxRequest = $.ajax({
+            type: "POST",
+            url: "Edit",
+            contentType: false,
+            processData: false,
+            data: data,
+            success: function (data) {
+
+                if (data.isSuccess == true) {
+
+                    swal.fire(
+                        'موفق!',
+                        data.message,
+                        'success'
+                    ).then(function (isConfirm) {
+                        window.location.href = "/adminpanel/Products/Index";
+
+                    });
+                }
+                else {
+
+                    swal.fire(
+                        'هشدار!',
+                        data.message,
+                        'warning'
+                    );
+                }
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(xhr.status);
+                alert(thrownError);
+            }
+
+        });
+
+        ajaxRequest.done(function (xhr, textStatus) {
+            // Do other operation
+        });
+    });
+
+
+</script>
+}
+
