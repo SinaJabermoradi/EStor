@@ -96,6 +96,57 @@
 
 <script>
     
+        function DeleteProduct(productId) {
+        swal.fire({
+            title: 'حذف محصول',
+            text: "از حذف محصول مطمئن هستید؟",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#7cacbe',
+            confirmButtonText: 'بله ، محصول حذف شود',
+            cancelButtonText: 'خیر'
+        }).then((result) => {
+            if (result.value) {
+                var postData = {
+                    'productId': productId,
+                };
+
+                $.ajax({
+                    contentType: 'application/x-www-form-urlencoded',
+                    dataType: 'json',
+                    type: "POST",
+                    url: "Delete",
+                    data: postData,
+                    success: function (data) {
+                        if (data.isSuccess == true) {
+                            swal.fire(
+                                'موفق!',
+                                data.message,
+                                'success'
+                            ).then(function (isConfirm) {
+                                location.reload();
+                            });
+                        }
+                        else {
+
+                            swal.fire(
+                                'هشدار!',
+                                data.message,
+                                'warning'
+                            );
+
+                        }
+                    },
+                    error: function (request, status, error) {
+                        alert(request.responseText);
+                    }
+
+                });
+
+            }
+        })
+    }
 
 </script>
 }
