@@ -10,7 +10,7 @@ public class Product : BaseEntity  // محصول
     public decimal Price { get; set; } // قیمت محصول 
     public long CountOfProductInInventory { get; set; } // تعداد موجودی محصول در انبار
     public bool IsThisProductBeDisplayedOnTheSite { get; set; } // این محصول در سایت نمایش داده بشود یا خیر
-
+    public long ViewCount { get; set; }  // تعداد بازدید از محصول
 
 
     #region Category رابطه ی یک به چند با دسته بندی محصولات یا

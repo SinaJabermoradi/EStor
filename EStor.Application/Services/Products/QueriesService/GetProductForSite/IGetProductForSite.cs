@@ -4,5 +4,9 @@ namespace EStor.Application.Services.Products.QueriesService.GetProductForSite;
 
 public interface IGetProductForSite
 {
-    ServiceResultDto<ResultProductForSiteDto> Execute(string searchKey, int pageNumber,int pageSize, long? categoryId);
+    ServiceResultDto<ResultProductForSiteDto> Execute(Ordering orderParameter
+        , string searchKey
+        , int pageNumber
+        , int pageSize
+        , long? categoryId);
 }

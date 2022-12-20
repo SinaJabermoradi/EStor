@@ -13,7 +13,11 @@ public class GetProductForSite : IGetProductForSite
         _context = context;
     }
 
-    public ServiceResultDto<ResultProductForSiteDto> Execute(string searchKey, int pageNumber,int pageSize, long? categoryId)
+    public ServiceResultDto<ResultProductForSiteDto> Execute(Ordering orderParameter
+        , string searchKey
+        , int pageNumber
+        , int pageSize
+        , long? categoryId)
     {
         Random randomStar = new Random();
         int totalRow = 0;
@@ -23,16 +27,22 @@ public class GetProductForSite : IGetProductForSite
 
         if (categoryId != null)
             productQuery = productQuery
-                .Where(product => product.Category.Id == categoryId 
+                .Where(product => product.Category.Id == categoryId
                                   || product.Category.ParentCategoryId == categoryId)
                 .AsQueryable();
 
         if (!(string.IsNullOrWhiteSpace(searchKey)))
             productQuery = productQuery
-                .Where(product => product.Name.Contains(searchKey) 
-                                  || product.Brand.Contains(searchKey) 
+                .Where(product => product.Name.Contains(searchKey)
+                                  || product.Brand.Contains(searchKey)
                                   || product.Category.Name.Contains(searchKey))
                 .AsQueryable();
+
+        switch (orderParameter)
+        {
+          
+        }
+
 
         var product = productQuery.ToPaged(pageNumber, pageSize, out totalRow);
 
