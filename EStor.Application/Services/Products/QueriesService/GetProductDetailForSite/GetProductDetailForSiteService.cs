@@ -26,6 +26,9 @@ public class GetProductDetailForSiteService : IGetProductDetailForSiteService
         if (product == null)
             throw new Exception("محصول پیدا نشد .... ");
 
+        product.ViewCount++;
+        _context.SaveChanges();
+
         Random rnd = new Random();
 
         return new ServiceResultDto<ProductDetailForSiteDto>
