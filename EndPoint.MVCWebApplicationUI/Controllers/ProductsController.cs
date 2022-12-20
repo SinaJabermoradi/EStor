@@ -16,9 +16,10 @@ namespace EndPoint.MVCWebApplicationUI.Controllers
         [HttpGet]
         public IActionResult Index(string searchKey
                         , long? categoryId
-                        , int page)
+                        , int page = 1
+                        , int pageSize = 20)
         {
-            return View(_productFacad.GetProductForSite.Execute(searchKey,page , categoryId).Data);
+            return View(_productFacad.GetProductForSite.Execute(searchKey, page, categoryId).Data);
         }
 
 

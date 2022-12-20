@@ -13,7 +13,7 @@ public class GetProductForSite : IGetProductForSite
         _context = context;
     }
 
-    public ServiceResultDto<ResultProductForSiteDto> Execute(string searchKey, int pageNumber, long? categoryId)
+    public ServiceResultDto<ResultProductForSiteDto> Execute(string searchKey, int pageNumber,int pageSize, long? categoryId)
     {
         Random randomStar = new Random();
         int totalRow = 0;
@@ -34,7 +34,7 @@ public class GetProductForSite : IGetProductForSite
                                   || product.Category.Name.Contains(searchKey))
                 .AsQueryable();
 
-        var product = productQuery.ToPaged(pageNumber, 5, out totalRow);
+        var product = productQuery.ToPaged(pageNumber, pageSize, out totalRow);
 
         return new ServiceResultDto<ResultProductForSiteDto>
         {
