@@ -40,7 +40,43 @@ public class GetProductForSite : IGetProductForSite
 
         switch (orderParameter)
         {
-          
+            case Ordering.NotOrder:
+                productQuery = productQuery
+                    .OrderByDescending(product => product.Id)
+                    .AsQueryable();
+                break;
+
+            case Ordering.MostVisited:
+                productQuery = productQuery
+                    .OrderByDescending(product => product.ViewCount)
+                    .AsQueryable();
+                break;
+
+            case Ordering.MostSelling:
+                //TODO ==> هر موقع سبد خرید رو نوشتم این رو تکمیل می کنم
+                break;
+
+            case Ordering.MostPopular: 
+                // TODO ===> جمعی از اون محصولاتی که بیشترین بازدید رو داشتن و همچنین بیشترین خرید رو داشتن
+                break;
+
+            case Ordering.TheNewest:
+                productQuery = productQuery
+                    .OrderByDescending(product => product.Id)
+                    .AsQueryable();
+                break;
+
+            case Ordering.Cheapest:
+                productQuery = productQuery
+                    .OrderBy(product => product.Price)
+                    .AsQueryable();
+                break;
+
+            case Ordering.TheMostExpensive:
+                productQuery = productQuery
+                    .OrderByDescending(product => product.Price)
+                    .AsQueryable();
+                break;
         }
 
 
