@@ -1,4 +1,5 @@
 ﻿using EStor.Application.Interfaces.Contexts;
+using EStor.Domain.Entities.HomePage;
 using EStor.Domain.Entities.Products;
 using EStor.Domain.Entities.Users;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +28,10 @@ namespace EStor.Persistence.Context
         public DbSet<ProductImage> ProductImages { get; set; }
 
         public DbSet<ProductFeatures> ProductFeatures{ get; set; }
+
+        public DbSet<Slider> Slider { get; set; }
+        
+        public DbSet<HomePageImage> HomePageImages { get; set; }
 
         #endregion
 
@@ -100,6 +105,14 @@ namespace EStor.Persistence.Context
             modelBuilder.Entity<ProductImage>()
                 .HasQueryFilter(image =>
                     !image.IsRemoved);// این داره میگه اگر پاک نشده بود ، دیتا رو نشون بده و اگر پاک شده بود دیگه نشون نده
+
+            modelBuilder.Entity<Slider>()
+                .HasQueryFilter(slider =>
+                    !slider.IsRemoved);// این داره میگه اگر پاک نشده بود ، دیتا رو نشون بده و اگر پاک شده بود دیگه نشون نده
+
+            modelBuilder.Entity<HomePageImage>()
+                .HasQueryFilter(image =>
+                    !image.IsRemoved); // این داره میگه اگر پاک نشده بود ، دیتا رو نشون بده و اگر پاک شده بود دیگه نشون نده
         }
 
         private static void SeedData(ModelBuilder modelBuilder)
