@@ -34,9 +34,11 @@
 
   <ItemGroup>
     <Folder Include="Services\Common\CommandsService\" />
-    <Folder Include="Services\Common\CommonFacad\" />
     <Folder Include="Services\Common\QueriesService\GetMenuItem\" />
     <Folder Include="Services\Common\QueriesService\GetCategoryForSearch\" />
+    <Folder Include="Services\Common\QueriesService\GetSlider\" />
+    <Folder Include="Services\Common\QueriesService\GetHomePageImages\" />
+    <Folder Include="Services\HomePage\QueriesService\" />
     <Folder Include="Services\Products\CommandsService\RemoveProduct\" />
     <Folder Include="Services\Products\FacadPattern\" />
     <Folder Include="Services\Products\QueriesService\GetCategories\" />

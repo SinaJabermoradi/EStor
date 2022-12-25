@@ -1,7 +1,10 @@
 ﻿using EStor.Application.Interfaces.Contexts;
-using EStor.Application.Services.Common.CommonFacad;
 using EStor.Application.Services.Common.QueriesService.GetCategoryForSearch;
+using EStor.Application.Services.Common.QueriesService.GetHomePageImages;
 using EStor.Application.Services.Common.QueriesService.GetMenuItem;
+using EStor.Application.Services.Common.QueriesService.GetSlider;
+using EStor.Application.Services.HomePage.CommandsService.AddNewHomePageImage;
+using EStor.Application.Services.HomePage.CommandsService.AddNewSlider;
 using EStor.Application.Services.Products.FacadPattern;
 using EStor.Application.Services.Users.CommandsService.EditUser;
 using EStor.Application.Services.Users.CommandsService.RegisterUser;
@@ -50,6 +53,10 @@ builder.Services.AddScoped<IEditUserService, EditUserService>();
 builder.Services.AddScoped<IUserLoginService, UserLoginService>();
 builder.Services.AddScoped<IGetMenuItemService, GetMenuItemService>();
 builder.Services.AddScoped<IGetCategoryForSearchService, GetCategoryForSearchService>();
+builder.Services.AddScoped<IAddNewSliderService, AddNewSliderService>();
+builder.Services.AddScoped<IGetSliderService, GetSliderService>();
+builder.Services.AddScoped<IAddNewHomePageImage, AddNewHomePageImage>();
+builder.Services.AddScoped<IGetHomePageImages, GetHomePageImages>();
 
 
 #region Facad Injection
@@ -57,6 +64,7 @@ builder.Services.AddScoped<IGetCategoryForSearchService, GetCategoryForSearchSer
 builder.Services.AddScoped<IProductFacad, ProductFacad>();
 
 #endregion
+
 
 #endregion
 

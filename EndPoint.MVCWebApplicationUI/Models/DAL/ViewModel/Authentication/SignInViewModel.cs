@@ -1,4 +1,4 @@
-﻿namespace EndPoint.MVCWebApplicationUI.Models.DAL.ViewModel
+﻿namespace EndPoint.MVCWebApplicationUI.Models.DAL.ViewModel.Authentication
 {
     public class SignInViewModel
     {

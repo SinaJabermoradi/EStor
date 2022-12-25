@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace EndPoint.MVCWebApplicationUI.Models.DAL.ViewModel
+namespace EndPoint.MVCWebApplicationUI.Models.DAL.ViewModel.Authentication
 {
     public class SignUpViewModel
     {

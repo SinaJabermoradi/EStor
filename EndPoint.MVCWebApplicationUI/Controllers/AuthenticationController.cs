@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 using System.Text.RegularExpressions;
-using EndPoint.MVCWebApplicationUI.Models.DAL.ViewModel;
+using EndPoint.MVCWebApplicationUI.Models.DAL.ViewModel.Authentication;
 using EStor.Application.Services.Users.CommandsService.RegisterUser;
 using EStor.Application.Services.Users.CommandsService.UserLogIn;
 using EStor.CommonUtility.DTO;

@@ -1,6 +1,12 @@
 ﻿@using System.Runtime.InteropServices.ComTypes
+@using EndPoint.MVCWebApplicationUI.Models.DAL.ViewModel.HomePage
+@using EStor.Domain.Entities.HomePage
+@model HomePageViewModel
 @{
+    ViewData["Title"] = "صفحه اصلی ";
     Layout = "_Layout";
+    int counter = 1;
+
 }
 
 <!-- header-------------------------------->
@@ -12,27 +18,33 @@
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+                        @for (int i = 1; i <= Model.Sliders.Count - 1; i++)
+                        {
+                            <li data-target="#carouselExampleIndicators" data-slide-to="@i"></li>
+                        }
                     </ol>
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="~/WebApplicationTemplate/assets/images/slider-main/sm-1.jpg" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="~/WebApplicationTemplate/assets/images/slider-main/sm-2.jpg" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="~/WebApplicationTemplate/assets/images/slider-main/sm-3.jpg" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="~/WebApplicationTemplate/assets/images/slider-main/sm-4.jpg" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="~/WebApplicationTemplate/assets/images/slider-main/sm-5.jpg" class="d-block w-100" alt="...">
-                        </div>
+                        @foreach (var slider in Model.Sliders)
+                        {
+                            string sliderAlt = $"اسلایدر  {counter}";
+                            @if (counter ==1)
+                            {
+                                <div class="carousel-item active">
+                                    <a href="@slider.Link" target="_blank">
+                                        <img src="~/@slider.ImageSrc" class="d-block w-100" alt="@sliderAlt">
+                                    </a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="carousel-item">
+                                    <a href="@slider.Link" target="_blank">
+                                        <img src="~/@slider.ImageSrc" class="d-block w-100" alt="@sliderAlt">
+                                    </a>
+                                </div>
+                            }
+                            counter++;
+                        }
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                         <span class="fa fa-angle-left" aria-hidden="true"></span>
@@ -48,23 +60,23 @@
         <!-- adplacement--------------------------->
         <div class="col-lg-4 col-md-4 col-xs-12 pl mt-1">
             <div class="adplacement-container-column">
-                <a href="#" class="adplacement-item">
+                <a href="@Model.Images.Where(image => image.ImageLocation == ImageLocation.چپ_اسلایدر_تصویر_بالا).FirstOrDefault()?.Link?? '  '  " class="adplacement-item"  target="_blank">
                     <div class="adplacement-sponsored-box">
-                        <img src="~/WebApplicationTemplate/assets/images/adplacement/a-1.jpg">
+                        <img src="~/@Model.Images.Where(image => image.ImageLocation == ImageLocation.چپ_اسلایدر_تصویر_بالا).FirstOrDefault()?.ImageSrc?? '  '  ">
                     </div>
                 </a>
-                <a href="#" class="adplacement-item">
+                <a href="@Model.Images.Where(image => image.ImageLocation == ImageLocation.چپ_اسلایدر_تصویر_پایین).FirstOrDefault()?.Link?? '  '  " class="adplacement-item"  target="_blank">
                     <div class="adplacement-sponsored-box">
-                        <img src="~/WebApplicationTemplate/assets/images/adplacement/a-2.jpg">
+                        <img src="~/@Model.Images.Where(image => image.ImageLocation == ImageLocation.چپ_اسلایدر_تصویر_پایین).FirstOrDefault()?.ImageSrc?? '  ' ">
                     </div>
                 </a>
             </div>
         </div>
         <div class="col-lg-3 col-md-3 col-xs-12 pr">
             <div class="adplacement-container-column mt-4">
-                <a href="#" class="adplacement-item img-banner">
+                <a href="@Model.Images.Where(image => image.ImageLocation == ImageLocation.پایینِ_اسلایدر_تصویر_راست).FirstOrDefault()?.Link?? '  '  " class="adplacement-item img-banner"  target="_blank">
                     <div class="adplacement-sponsored-box">
-                        <img src="~/WebApplicationTemplate/assets/images/adplacement/a-3.jpg">
+                        <img src="~/@Model.Images.Where(image => image.ImageLocation == ImageLocation.پایینِ_اسلایدر_تصویر_راست).FirstOrDefault()?.ImageSrc?? '  ' ">
                     </div>
                 </a>
             </div>
@@ -461,40 +473,22 @@
     <div class="d-block">
         <div class="adplacement-container-row">
             <div class="col-12">
-                <a href="#" class="adplacement-item mb-4">
+                <a href="@Model.Images.Where(image => image.ImageLocation == ImageLocation.عکسِ_کشیده_وسط_صفحه).FirstOrDefault()?.Link?? '  '  " class="adplacement-item mb-4"  target="_blank">
                     <div class="adplacement-sponsored_box">
-                        <img src="~/WebApplicationTemplate/assets/images/adplacement/a-8.jpg">
+                        <img src="~/@Model.Images.Where(image => image.ImageLocation == ImageLocation.عکسِ_کشیده_وسط_صفحه).FirstOrDefault()?.ImageSrc?? '  '  ">
                     </div>
                 </a>
             </div>
-            <div class="col-6 col-lg-3 pr">
-                <a href="#" class="adplacement-item">
-                    <div class="adplacement-sponsored_box">
-                        <img src="~/WebApplicationTemplate/assets/images/adplacement/a-4.jpg">
-                    </div>
-                </a>
-            </div>
-            <div class="col-6 col-lg-3 pr">
-                <a href="#" class="adplacement-item">
-                    <div class="adplacement-sponsored_box">
-                        <img src="~/WebApplicationTemplate/assets/images/adplacement/a-5.jpg">
-                    </div>
-                </a>
-            </div>
-            <div class="col-6 col-lg-3 pr">
-                <a href="#" class="adplacement-item">
-                    <div class="adplacement-sponsored_box">
-                        <img src="~/WebApplicationTemplate/assets/images/adplacement/a-6.jpg">
-                    </div>
-                </a>
-            </div>
-            <div class="col-6 col-lg-3 pr">
-                <a href="#" class="adplacement-item">
-                    <div class="adplacement-sponsored_box">
-                        <img src="~/WebApplicationTemplate/assets/images/adplacement/a-7.jpg">
-                    </div>
-                </a>
-            </div>
+            @foreach (var image in Model.Images.Where(image => image.ImageLocation == ImageLocation.گروه_اول).ToList())
+            {
+                <div class="col-6 col-lg-3 pr">
+                    <a href="@image.Link" class="adplacement-item" target="_blank">
+                        <div class="adplacement-sponsored_box">
+                            <img src="~/@image.ImageSrc">
+                        </div>
+                    </a>
+                </div>
+            }
         </div>
     </div>
 </div>
@@ -821,34 +815,16 @@
         <div class="container-fluid">
             <div class="row pr">
                 <div class="adplacement-container-row">
-                    <div class="col-6 col-lg-3 pr">
-                        <a href="#" class="adplacement-item">
-                            <div class="adplacement-sponsored_box">
-                                <img src="~/WebApplicationTemplate/assets/images/adplacement/a-4.jpg">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-6 col-lg-3 pr">
-                        <a href="#" class="adplacement-item">
-                            <div class="adplacement-sponsored_box">
-                                <img src="~/WebApplicationTemplate/assets/images/adplacement/a-5.jpg">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-6 col-lg-3 pr">
-                        <a href="#" class="adplacement-item">
-                            <div class="adplacement-sponsored_box">
-                                <img src="~/WebApplicationTemplate/assets/images/adplacement/a-6.jpg">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-6 col-lg-3 pr">
-                        <a href="#" class="adplacement-item">
-                            <div class="adplacement-sponsored_box">
-                                <img src="~/WebApplicationTemplate/assets/images/adplacement/a-7.jpg">
-                            </div>
-                        </a>
-                    </div>
+                    @foreach (var image in Model.Images.Where(image => image.ImageLocation == ImageLocation.گروه_دوم).ToList())
+                    {
+                        <div class="col-6 col-lg-3 pr">
+                            <a href="@image.Link" class="adplacement-item">
+                                <div class="adplacement-sponsored_box">
+                                    <img src="~/@image.ImageSrc">
+                                </div>
+                            </a>
+                        </div>
+                    }
                 </div>
             </div>
         </div>

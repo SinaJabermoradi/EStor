@@ -1,0 +1,129 @@
+﻿
+@{
+    ViewData["Title"] = "افزودن اسلایدر به صفحه اصلی سایت";
+    Layout = "_AdminTemplateLayout";
+}
+
+@section Css
+{
+
+    <link href="~/Sweetalert2/sweetalert2.min.css" rel="stylesheet"/>
+
+}
+
+<section class="basic-elements">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title-wrap bar-success">
+                        <h4 class="card-title mb-0"><i class="icon-plus"></i>      افزودن اسلایدر جدید در صفحه اصلی سایت        </h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="px-3">
+                        <div class="form">
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 mb-1">
+                                        <fieldset class="form-group">
+                                            <label for="Link">لینک آدرس صفحه ای که این اسلاید ما را می برد  : </label>
+                                            <input type="text" class="form-control round" id="Link">
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-xl-12 col-lg-12 col-md-12 mb-1">
+                                        <fieldset class="form-group">
+                                            <label for="Name">نام اسلاید ( به انگلیسی وارد کنید ) : </label>
+                                            <input type="text" class="form-control round" id="Name">
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-xl-12 col-lg-12 col-md-12 mb-1">
+                                        <fieldset class="form-group">
+                                            <label for="SliderImages">تصویر ( ابعاد عکس باید 1780 در  890 باشد ) </label>
+                                            <input type="file" accept="image/*" id="SliderImages">
+                                        </fieldset>
+                                    </div>
+
+                                    <div class="col-xl-12 col-lg-12 col-md-12 mb-1">
+                                        <fieldset class="form-group">
+                                            <br />
+                                            <a id="CreateNewSlider" class="btn mr-1 btn-round shadow-z-2 btn-success col-md-12">آپلود تصویر و ساخت اسلایدر</a>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+@section Scripts
+{
+
+    <script src="~/Sweetalert2/sweetalert2.min.js"></script>
+
+
+    <script>
+
+    $('#CreateNewSlider').on('click', function () {
+        
+        var data = new FormData();
+    
+        //دریافت مقادیر از تکس باکس ها و....
+        data.append("link", $("#Link").val());
+        data.append("sliderName", $("#Name").val());
+        
+
+         //دریافت عکس های انتخاب شده توسط کاربر و قرار دادن عکس ها در متغیر data
+        var SliderImages = document.getElementById("SliderImages");
+
+        if (SliderImages.files.length > 0) {
+            for (var i = 0; i < SliderImages.files.length; i++) {
+                data.append('image-' + i, SliderImages.files[i]);
+            }
+        }
+
+                // ارسال اطلاعات بع کنترلر
+        var ajaxRequest = $.ajax({
+            type: "POST",
+            url: "Add",
+            contentType: false,
+            processData: false,
+            data: data,
+            success: function (data) {
+                if (data.isSuccess == true) {
+                    swal.fire(
+                        'موفق!',
+                        data.message,
+                        'success'
+                    ).then(function (isConfirm) {
+                        window.location.href = "/adminpanel/Sliders/Index";
+                    });
+                }
+                else {
+                    swal.fire(
+                        'هشدار!',
+                        data.message,
+                        'warning'
+                    );
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(xhr.status);
+                alert(thrownError);
+            }
+        });
+        ajaxRequest.done(function (xhr, textStatus) {
+            // Do other operation
+        });
+      });
+
+</script>
+}
+

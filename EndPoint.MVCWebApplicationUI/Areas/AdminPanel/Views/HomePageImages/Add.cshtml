@@ -1,0 +1,145 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using EStor.Domain.Entities.HomePage
+
+@{
+    ViewData["Title"] = "افزودن عکس به صفحه اصلی سایت";
+    Layout = "_AdminTemplateLayout";
+}
+
+
+@section Css
+{
+
+<link href="~/Sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+
+}
+
+
+
+<section class="basic-elements">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title-wrap bar-success">
+                        <h4 class="card-title mb-0"><i class="icon-plus"></i>      افزودن عکس جدید در صفحه اصلی سایت        </h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="px-3">
+                        <div class="form">
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 mb-1">
+                                        <fieldset class="form-group">
+                                            <label for="ImageLocation">موقعیت نمایش تصویر در صفحه اصلی   : </label>
+                                            <select id="ImageLocation" name="ImageLocation" asp-items="Html.GetEnumSelectList<ImageLocation>()"></select>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-xl-12 col-lg-12 col-md-12 mb-1">
+                                        <fieldset class="form-group">
+                                            <label for="Link">لینک آدرس صفحه ای که این عکس ما را می برد  : </label>
+                                            <input type="text" class="form-control round" id="Link">
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-xl-12 col-lg-12 col-md-12 mb-1">
+                                        <fieldset class="form-group">
+                                            <label for="Name">نام عکس ( به انگلیسی وارد کنید ) : </label>
+                                            <input type="text" class="form-control round" id="Name">
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-xl-12 col-lg-12 col-md-12 mb-1">
+                                        <fieldset class="form-group">
+                                            <label for="Images">تصویر </label>
+                                            <input type="file" accept="image/*" id="Images">
+                                            <p style="color: #b3b1b1">چپ_اسلایدر_تصویر_بالا   ====> Image Size  856 x 428</p>
+                                            <p style="color: #b3b1b1">چپ_اسلایدر_تصویر_پایین   ====> Image Size  856 x 428</p>
+                                            <p style="color:  #b3b1b1">پایینِ_اسلایدر_تصویر_راست   ====> Image Size  272 x 406</p>
+                                            <p style="color:  #b3b1b1">عکسِ_کشیده_وسط_صفحه   ====> Image Size  1656 x 210</p>
+                                            <p style="color:  #b3b1b1">گروه_اول   ====> Image Size  400 x 300</p>
+                                            <p style="color:  #b3b1b1">گروه_دوم   ====> Image Size  400 x 300</p>
+                                        </fieldset>
+                                    </div>
+
+                                    <div class="col-xl-12 col-lg-12 col-md-12 mb-1">
+                                        <fieldset class="form-group">
+                                            <br />
+                                            <a id="CreateNewImage" class="btn mr-1 btn-round shadow-z-2 btn-success col-md-12">آپلود و ساخت تصویر</a>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+@section Scripts
+{
+
+<script src="~/Sweetalert2/sweetalert2.min.js"></script>
+
+
+<script>
+
+    $('#CreateNewImage').on('click', function () {
+
+        var data = new FormData();
+
+        //دریافت مقادیر از تکس باکس ها و....
+        data.append("ImageLocation", $("#ImageLocation").val());
+        data.append("Link", $("#Link").val());
+        data.append("ImageName", $("#Name").val());
+
+
+         //دریافت عکس های انتخاب شده توسط کاربر و قرار دادن عکس ها در متغیر data
+        var Images = document.getElementById("Images");
+
+        if (Images.files.length > 0) {
+                data.append('ImageFile', Images.files[0]);
+        }
+
+                // ارسال اطلاعات بع کنترلر
+        var ajaxRequest = $.ajax({
+            type: "POST",
+            url: "Add",
+            contentType: false,
+            processData: false,
+            data: data,
+            success: function (data) {
+                if (data.isSuccess == true) {
+                    swal.fire(
+                        'موفق!',
+                        data.message,
+                        'success'
+                    ).then(function (isConfirm) {
+                        window.location.href = "/adminpanel/HomePageImages/Index";
+                    });
+                }
+                else {
+                    swal.fire(
+                        'هشدار!',
+                        data.message,
+                        'warning'
+                    );
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(xhr.status);
+                alert(thrownError);
+            }
+        });
+        ajaxRequest.done(function (xhr, textStatus) {
+            // Do other operation
+        });
+      });
+
+</script>
+}
+
