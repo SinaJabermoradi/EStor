@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using EStor.Domain.Entities.Carts;
 using EStor.Domain.Entities.HomePage;
 using EStor.Domain.Entities.Products;
 using EStor.Domain.Entities.Users;
@@ -30,6 +31,10 @@ namespace EStor.Application.Interfaces.Contexts
         public DbSet<Slider> Slider { get; set; }
 
         public DbSet<HomePageImage> HomePageImages { get; set; }
+        
+        public DbSet<Cart> Carts { get; set; }
+        
+        public DbSet<CartItem> CartItems { get; set; }
 
         public int SaveChanges();
 
