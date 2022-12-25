@@ -18,3 +18,14 @@ Core           ===> In This Folder , Have 2 Layer ===> Domain & Application
 Common         ===> In This Folder , Have 1 Layer ===> CommonUtility
 Infrastructure ===> In This Folder , Have 2 Layer ===> Infrastructure & Persistence
 Presentation   ===> In This Folder , Have 1 Layer ===> EndPoint.MVCWebApplicationUI
+
+
+#Application Layer
+
+Application Layer Is (( Service Layer ))  ./n
+
+it Means All Of My Program Service Is In This Layer /n
+
+
+The services that I used in this program follow the transaction service method
+
